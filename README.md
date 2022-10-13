@@ -1,4 +1,5 @@
 ## Getting Started
+Additional information about installing and configuring the project
 
 ### Prerequisites
 
@@ -12,10 +13,15 @@ npm init -y
 ### Installation
 
 ```shell
+## create the file '.nvmrc'
+$ node -v > .nvmrc
+
+## client dependencies
 $ npm i -D parcel
 $ npm i -D handlebars
-$ npm i -D sass
+$ npm i -D sass ## optional (parcel includes sass out of the box)  
 
+## server dependencies
 $ npm i -D express
 ```
 
@@ -38,3 +44,6 @@ $ npm run start
 ## Remove temporary folders
 $ npm run clear
 ```
+
+## Deployment
+https://dmi-chat.netlify.app/

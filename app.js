@@ -1,12 +1,12 @@
-const express = require('express');
+const express = require('express')
 
-const app = express();
+const app = express()
 
-const PORT = 3000;
+const PORT = 3000
 const STATIC_PATH = '/dist'
 
 app.use(express.static(`${__dirname}${STATIC_PATH}`))
 
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
-});
+app.listen(process.env.PORT || PORT, () => {
+  console.log(`Server started on port ${PORT}`)
+})
