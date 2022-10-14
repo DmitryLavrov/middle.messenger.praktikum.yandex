@@ -1,0 +1,28 @@
+.error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  height: 100vh;
+}
+
+.error-title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.error-content {
+  font-size: 1rem;
+}
+
+.error-link {
+  font-size: 1rem;
+  color: var(--color-link);
+  text-decoration: none;
+  &:hover {
+    font-weight: bold;
+    color: blue;
+  }
+}
