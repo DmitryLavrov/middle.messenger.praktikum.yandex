@@ -1,0 +1,22 @@
+.field {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+
+  & input {
+    background-color: var(--color-light);
+    padding-left: 0.25rem;
+    border-radius: 0.1rem;
+  }
+
+  & span {
+    color: inherit;
+    background-color: inherit;
+    width: 9rem;
+  }
+}
+
+.error-message {
+  display: none;
+  color: darkred;
+}
