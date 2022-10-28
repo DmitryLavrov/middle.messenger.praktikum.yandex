@@ -1,18 +1,18 @@
-{{#with form}}
-    <h1 class="form-title">
-        {{title}}
-    </h1>
-    <form class="form">
-        <div class="form-fields">
+<h1 class="form-title">
+    {{title}}
+</h1>
+<form class="form">
+    <div class="form-error-message">Error message</div>
+
+    <div class="form-fields">
         {{#each fields}}
             {{{field}}}
         {{/each}}
-        </div>
+    </div>
 
-        <div class="form-buttons">
+    <div class="form-buttons">
         {{#each buttons}}
             {{{button}}}
         {{/each}}
-        </div>
-    </form>
-{{/with}}
+    </div>
+</form>
