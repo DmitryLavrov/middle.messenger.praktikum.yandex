@@ -1,8 +1,8 @@
 import Handlebars from 'handlebars'
-import EventBus from './eventBus'
+import {EventBus} from './eventBus'
 import {Children, ChildrenArray, Props, PropsAndStubs} from './types'
 
-export default abstract class Block {
+export abstract class Block<Props> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -71,11 +71,11 @@ export default abstract class Block {
   // =====================================================================
   // Event CDM
   private _componentDidMount() {
-    this.componentDidMount(this.props)
+    this.componentDidMount && this.componentDidMount(this.props)
     this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
   }
 
-  abstract componentDidMount(oldProps: Props): void
+  protected componentDidMount?(oldProps: Props): void
 
   public dispatchComponentDidMount(): void {
     this.eventBus.emit(Block.EVENTS.FLOW_CDM)
@@ -84,14 +84,15 @@ export default abstract class Block {
   // =====================================================================
   // Event CDU
   private _componentDidUpdate(oldProps: Props, newProps: Props) {
-    const needRender = this.componentDidUpdate(oldProps, newProps)
+    let needRender = true
+
+    this.componentDidUpdate && (needRender = this.componentDidUpdate(oldProps, newProps))
     if (needRender) {
-      this._removeEvents()
       this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
     }
   }
 
-  abstract componentDidUpdate(oldProps: Props, newProps: Props): boolean
+  protected componentDidUpdate?(oldProps: Props, newProps: Props): boolean
 
   public setProps(newProps: Props) {
     if (!newProps) {
@@ -129,7 +130,7 @@ export default abstract class Block {
       .filter(([key]) => key.startsWith('event'))
       .forEach(([key, value]) => {
         const eventName = key.slice(5).toLowerCase()
-        this._element.addEventListener(eventName, value as ()=>{}, true)
+        this._element.addEventListener(eventName, value as () => {}, true)
       })
   }
 
@@ -140,7 +141,7 @@ export default abstract class Block {
       .filter(([key]) => key.startsWith('event'))
       .forEach(([key, value]) => {
         const eventName = key.slice(5).toLowerCase()
-        this._element.removeEventListener(eventName, value as ()=>{}, true)
+        this._element.removeEventListener(eventName, value as () => {}, true)
       })
   }
 

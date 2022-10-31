@@ -1,6 +1,6 @@
-import ErrorPage from '../pages/errorPage/errorPage'
-import TestLinks from '../components/temporary/testLinks/testLinks'
-import Link from '../components/link/link'
+import {ErrorPage} from '../pages/errorPage/errorPage'
+import {TestLinks} from '../components/temporary/testLinks/testLinks'
+import {Link} from '../components/link/link'
 import {render} from '../utils/renderDOM'
 import '../styles/main.scss'
 
@@ -12,11 +12,7 @@ const errorPage = new ErrorPage({
     attrHref: '/',
     label: 'Back to chat'
   }),
-  testLinks: new TestLinks({
-    settings: {
-      withInternalID: true
-    }
-  })
+  testLinks: new TestLinks()
 })
 
 render('#root', errorPage)

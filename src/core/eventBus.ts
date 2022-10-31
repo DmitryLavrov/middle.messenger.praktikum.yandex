@@ -1,6 +1,6 @@
 import {Listeners, Prop} from './types'
 
-export default class EventBus {
+export class EventBus {
   private readonly listeners: Listeners
 
   constructor() {

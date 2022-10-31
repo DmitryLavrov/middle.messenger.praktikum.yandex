@@ -6,6 +6,11 @@
   box-sizing: inherit;
 }
 
+ul,
+ol {
+  list-style-type: none;
+}
+
 html {
   box-sizing: border-box;
   font-size: 2rem;
@@ -15,7 +20,7 @@ html {
   }
 }
 
-body {
+.body {
   position: relative;
   font-family: "Open Sans", sans-serif;
   font-weight: 400;

@@ -1,10 +1,10 @@
-import FormPage from '../pages/formPage/formPage'
-import Form from '../components/form/form'
-import Field from '../components/formField/field'
-import Button from '../components/button/button'
-import TestLinks from '../components/temporary/testLinks/testLinks'
-import Input from '../components/input/input'
-import Link from '../components/link/link'
+import {FormPage} from '../pages/formPage/formPage'
+import {Form} from '../components/form/form'
+import {Field} from '../components/formField/field'
+import {Button} from '../components/button/button'
+import {TestLinks} from '../components/temporary/testLinks/testLinks'
+import {Input} from '../components/input/input'
+import {Link} from '../components/link/link'
 import {render} from '../utils/renderDOM'
 import {formSubmit, inputBlur, inputFocus} from '../services/eventsHandlers'
 import '../styles/main.scss'
@@ -18,6 +18,7 @@ const registerPage = new FormPage({
       new Field({
         name: 'login',
         label: 'Login',
+        attrClass: 'form-field',
         input: new Input({
           attrId: 'login',
           attrName: 'login',
@@ -30,6 +31,7 @@ const registerPage = new FormPage({
       new Field({
         name: 'email',
         label: 'Email',
+        attrClass: 'form-field',
         input: new Input({
           attrId: 'email',
           attrName: 'email',
@@ -42,6 +44,7 @@ const registerPage = new FormPage({
       new Field({
         name: 'first_name',
         label: 'Name',
+        attrClass: 'form-field',
         input: new Input({
           attrId: 'first_name',
           attrName: 'first_name',
@@ -54,6 +57,7 @@ const registerPage = new FormPage({
       new Field({
         name: 'second_name',
         label: 'Surname',
+        attrClass: 'form-field',
         input: new Input({
           attrId: 'second_name',
           attrName: 'second_name',
@@ -66,6 +70,7 @@ const registerPage = new FormPage({
       new Field({
         name: 'phone',
         label: 'Phone',
+        attrClass: 'form-field',
         input: new Input({
           attrId: 'phone',
           attrName: 'phone',
@@ -78,6 +83,7 @@ const registerPage = new FormPage({
       new Field({
         name: 'password',
         label: 'Password',
+        attrClass: 'form-field',
         input: new Input({
           attrId: 'password',
           attrName: 'password',
@@ -89,6 +95,7 @@ const registerPage = new FormPage({
       new Field({
         name: 'passwordRepeated',
         label: 'Repeat password',
+        attrClass: 'form-field',
         input: new Input({
           attrId: 'passwordRepeated',
           attrName: 'passwordRepeated',

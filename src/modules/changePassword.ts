@@ -1,9 +1,9 @@
-import Form from '../components/form/form'
-import Field from '../components/formField/field'
-import Button from '../components/button/button'
-import TestLinks from '../components/temporary/testLinks/testLinks'
-import FormPage from '../pages/formPage/formPage'
-import Input from '../components/input/input'
+import {Form} from '../components/form/form'
+import {Field} from '../components/formField/field'
+import {Button} from '../components/button/button'
+import {TestLinks} from '../components/temporary/testLinks/testLinks'
+import {FormPage} from '../pages/formPage/formPage'
+import {Input} from '../components/input/input'
 import {render} from '../utils/renderDOM'
 import {formSubmit, inputBlur, inputFocus} from '../services/eventsHandlers'
 import '../styles/main.scss'
@@ -17,6 +17,7 @@ const profilePage = new FormPage({
       new Field({
         name: 'oldPassword',
         label: 'Old password',
+        attrClass: 'form-field',
         input: new Input({
           attrId: 'oldPassword',
           attrName: 'oldPassword',
@@ -28,6 +29,7 @@ const profilePage = new FormPage({
       new Field({
         name: 'password',
         label: 'New password',
+        attrClass: 'form-field',
         input: new Input({
           attrId: 'password',
           attrName: 'password',
@@ -39,6 +41,7 @@ const profilePage = new FormPage({
       new Field({
         name: 'passwordRepeated',
         label: 'Repeat password',
+        attrClass: 'form-field',
         input: new Input({
           attrId: 'passwordRepeated',
           attrName: 'passwordRepeated',

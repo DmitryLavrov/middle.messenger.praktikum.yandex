@@ -16,5 +16,6 @@
     "esModuleInterop": true,
     "suppressImplicitAnyIndexErrors": true
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts"],
+  "typeRoots": ["src/hbs.d.ts"]
 }
