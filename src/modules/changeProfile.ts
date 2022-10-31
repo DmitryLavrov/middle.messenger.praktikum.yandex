@@ -1,9 +1,9 @@
-import Form from '../components/form/form'
-import Field from '../components/formField/field'
-import Button from '../components/button/button'
-import TestLinks from '../components/temporary/testLinks/testLinks'
-import FormPage from '../pages/formPage/formPage'
-import Input from '../components/input/input'
+import {Form} from '../components/form/form'
+import {Field} from '../components/formField/field'
+import {Button} from '../components/button/button'
+import {TestLinks} from '../components/temporary/testLinks/testLinks'
+import {FormPage} from '../pages/formPage/formPage'
+import {Input} from '../components/input/input'
 import {render} from '../utils/renderDOM'
 import {formSubmit, inputBlur, inputFocus} from '../services/eventsHandlers'
 import '../styles/main.scss'
@@ -17,6 +17,7 @@ const profilePage = new FormPage({
       new Field({
         name: 'login',
         label: 'Login',
+        attrClass: 'form-field',
         input: new Input({
           attrId: 'login',
           attrName: 'login',
@@ -29,6 +30,7 @@ const profilePage = new FormPage({
       new Field({
         name: 'email',
         label: 'Email',
+        attrClass: 'form-field',
         input: new Input({
           attrId: 'email',
           attrName: 'email',
@@ -41,6 +43,7 @@ const profilePage = new FormPage({
       new Field({
         name: 'first_name',
         label: 'Name',
+        attrClass: 'form-field',
         input: new Input({
           attrId: 'first_name',
           attrName: 'first_name',
@@ -53,6 +56,7 @@ const profilePage = new FormPage({
       new Field({
         name: 'second_name',
         label: 'Surname',
+        attrClass: 'form-field',
         input: new Input({
           attrId: 'second_name',
           attrName: 'second_name',
@@ -65,6 +69,7 @@ const profilePage = new FormPage({
       new Field({
         name: 'display_name',
         label: 'Display name',
+        attrClass: 'form-field',
         input: new Input({
           attrId: 'display_name',
           attrName: 'display_name',
@@ -77,6 +82,7 @@ const profilePage = new FormPage({
       new Field({
         name: 'phone',
         label: 'Phone',
+        attrClass: 'form-field',
         input: new Input({
           attrId: 'phone',
           attrName: 'phone',

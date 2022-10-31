@@ -1,13 +1,13 @@
-import FormPage from '../pages/formPage/formPage'
-import Form from '../components/form/form'
-import Field from '../components/formField/field'
-import Button from '../components/button/button'
-import TestLinks from '../components/temporary/testLinks/testLinks'
+import {FormPage} from '../pages/formPage/formPage'
+import {Form} from '../components/form/form'
+import {Field} from '../components/formField/field'
+import {Button} from '../components/button/button'
+import {TestLinks} from '../components/temporary/testLinks/testLinks'
 import {render} from '../utils/renderDOM'
 import {formSubmit, inputBlur, inputFocus} from '../services/eventsHandlers'
 import '../styles/main.scss'
-import Link from '../components/link/link'
-import Input from '../components/input/input'
+import {Link} from '../components/link/link'
+import {Input} from '../components/input/input'
 
 const loginPage = new FormPage({
   form: new Form({
@@ -18,6 +18,7 @@ const loginPage = new FormPage({
       new Field({
         name: 'login',
         label: 'Login',
+        attrClass: 'form-field',
         input: new Input({
           attrId: 'login',
           attrName: 'login',
@@ -30,6 +31,7 @@ const loginPage = new FormPage({
       new Field({
         name: 'password',
         label: 'Password',
+        attrClass: 'form-field',
         input: new Input({
           attrId: 'password',
           attrName: 'password',

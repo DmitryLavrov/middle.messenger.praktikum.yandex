@@ -1,12 +1,12 @@
-import ChatPage from '../pages/chatPage/chatPage'
-import TestLinks from '../components/temporary/testLinks/testLinks'
+import {ChatPage} from '../pages/chatPage/chatPage'
+import {TestLinks} from '../components/temporary/testLinks/testLinks'
 import {render} from '../utils/renderDOM'
 import '../styles/main.scss'
-import MessageBox from '../components/messageBox/messageBox'
-import Button from '../components/button/button'
-import MessageForm from '../components/messageForm/messageForm'
+import {MessageBox} from '../components/messageBox/messageBox'
+import {Button} from '../components/button/button'
+import {MessageForm} from '../components/messageForm/messageForm'
 import {formSubmit, messageBlur, messageFocus} from '../services/eventsHandlers'
-import Input from '../components/input/input'
+import {Input} from '../components/input/input'
 
 const chatPage = new ChatPage({
   messageBox: new MessageBox({

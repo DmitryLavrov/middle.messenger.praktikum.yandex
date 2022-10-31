@@ -1,12 +1,12 @@
-import ProfilePage from '../pages/profilePage/profilePage'
-import Form from '../components/form/form'
-import Field from '../components/formField/field'
-import Button from '../components/button/button'
-import TestLinks from '../components/temporary/testLinks/testLinks'
+import {ProfilePage} from '../pages/profilePage/profilePage'
+import {Form} from '../components/form/form'
+import {Field} from '../components/formField/field'
+import {Button} from '../components/button/button'
+import {TestLinks} from '../components/temporary/testLinks/testLinks'
 import {render} from '../utils/renderDOM'
 import '../styles/main.scss'
-import InputReadOnly from '../components/inputReadOnly/inputReadOnly'
-import Link from '../components/link/link'
+import {InputReadOnly} from '../components/inputReadOnly/inputReadOnly'
+import {Link} from '../components/link/link'
 
 const profilePage = new ProfilePage({
   form: new Form({
@@ -16,6 +16,7 @@ const profilePage = new ProfilePage({
       new Field({
         name: 'login',
         label: 'Login',
+        attrClass: 'form-field',
         input: new InputReadOnly({
           attrId: 'login',
           context: 'john'
@@ -24,6 +25,7 @@ const profilePage = new ProfilePage({
       new Field({
         name: 'email',
         label: 'Email',
+        attrClass: 'form-field',
         input: new InputReadOnly({
           attrId: 'email',
           context: 'dd@ggg.com'
@@ -32,6 +34,7 @@ const profilePage = new ProfilePage({
       new Field({
         name: 'name',
         label: 'Name',
+        attrClass: 'form-field',
         input: new InputReadOnly({
           attrId: 'name',
           context: 'John'
@@ -40,6 +43,7 @@ const profilePage = new ProfilePage({
       new Field({
         name: 'surname',
         label: 'Surname',
+        attrClass: 'form-field',
         input: new InputReadOnly({
           attrId: 'surname',
           context: 'Smith'
@@ -48,6 +52,7 @@ const profilePage = new ProfilePage({
       new Field({
         name: 'nickname',
         label: 'Display name',
+        attrClass: 'form-field',
         input: new InputReadOnly({
           attrId: 'nickname',
           context: 'John Smith'
@@ -56,6 +61,7 @@ const profilePage = new ProfilePage({
       new Field({
         name: 'phone',
         label: 'Phone',
+        attrClass: 'form-field',
         input: new InputReadOnly({
           attrId: 'phone',
           context: '+7 999 999-99-99'

@@ -13,7 +13,7 @@
 
 .form-error-message {
   display: none;
-  color: darkred;
+  color: var(--color-error);
 }
 
 .form-fields {
@@ -22,6 +22,10 @@
   gap: 0.5rem;
   justify-content: center;
   align-items: flex-end;
+}
+
+.form-field {
+  width: 100%;
 }
 
 .form-buttons {

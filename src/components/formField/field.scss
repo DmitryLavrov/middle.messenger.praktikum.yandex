@@ -18,5 +18,6 @@
 
 .error-message {
   display: none;
-  color: darkred;
+  text-align: center;
+  color: var(--color-error);
 }

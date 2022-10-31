@@ -1,8 +1,8 @@
-import Block from './block'
-import Button from '../components/button/button'
-import Form from '../components/form/form'
-import Field from '../components/formField/field'
-import MessageBox from '../components/messageBox/messageBox'
+import {Block} from './block'
+import {Button} from '../components/button/button'
+import {Form} from '../components/form/form'
+import {Field} from '../components/formField/field'
+import {MessageBox} from '../components/messageBox/messageBox'
 
 export type Listeners = Record<string, Function[]>
 export type Prop = string | Event | Settings

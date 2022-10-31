@@ -1,11 +1,16 @@
 interface Options {
-  timeout?: number;
-  method?: string;
-  headers?: Record<string, string>;
-  data?: Record<string, any>;
-  params?: Record<string, any>;
+  timeout?: number
+  method?: string
+  headers?: Record<string, string>
+  data?: Record<string, any>
+  params?: Record<string, any>
   retries?: number
 }
+
+type HTTPMethod = (
+  url: string,
+  options?: Options
+) => Promise<unknown>
 
 enum METHODS {
   GET = 'GET',
@@ -28,16 +33,16 @@ function queryStringify(data: Object = {}) {
 // =====================================================================
 // class HTTPTransport
 export class HTTPTransport {
-  get = (url: string, options: Options = {}) => (
+  get:HTTPMethod = (url, options = {}) => (
     this.request(url, {...options, method: METHODS.GET}, options.timeout)
   )
-  put = (url: string, options: Options = {}) => (
+  put:HTTPMethod = (url, options = {}) => (
     this.request(url, {...options, method: METHODS.PUT}, options.timeout)
   )
-  post = (url: string, options: Options = {}) => (
+  post:HTTPMethod = (url, options = {}) => (
     this.request(url, {...options, method: METHODS.POST}, options.timeout)
   )
-  delete = (url: string, options: Options = {}) => (
+  delete:HTTPMethod = (url, options = {}) => (
     this.request(url, {...options, method: METHODS.DELETE}, options.timeout)
   )
 
