@@ -1,8 +1,8 @@
 import Handlebars from 'handlebars'
 import {EventBus} from './eventBus'
-import {Children, ChildrenArray, Props, PropsAndStubs} from './types'
+import {Children, ChildrenArray, Props} from './types'
 
-export abstract class Block<Props> {
+export abstract class Block<T extends Props> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -12,7 +12,7 @@ export abstract class Block<Props> {
 
   private readonly _tagName: string
   private _element: HTMLElement
-  protected props: Props
+  protected props: T
   protected children: Children
   protected childrenArray: ChildrenArray
   private eventBus: EventBus
@@ -29,7 +29,7 @@ export abstract class Block<Props> {
     this.children = children
     this.childrenArray = childrenArray
 
-    this.props = this._makePropsProxy({...props, id: this._id})
+    this.props = this._makePropsProxy({...props, id: this._id}) as T
 
     this.eventBus = new EventBus()
 
@@ -196,7 +196,7 @@ export abstract class Block<Props> {
   // =====================================================================
   // COMPILE
   compile(tmpl: string, props: Props = {}) {
-    const propsAndStubs: PropsAndStubs = {...props}
+    const propsAndStubs: Props = {...props}
 
     // Make stubs for children
     Object.entries(this.children).forEach(([key, child]) => {

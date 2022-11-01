@@ -3,7 +3,7 @@ import {Block} from '../../core/block'
 import {InputProps} from '../../core/types'
 import './input.scss'
 
-export class Input extends Block {
+export class Input extends Block<InputProps> {
   constructor(props: InputProps) {
     super('input', props)
   }
