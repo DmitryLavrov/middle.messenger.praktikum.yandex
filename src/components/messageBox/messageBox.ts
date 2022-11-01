@@ -3,7 +3,7 @@ import {Block} from '../../core/block'
 import {MessageBoxProps} from '../../core/types'
 import './messageBox.scss'
 
-export class MessageBox extends Block {
+export class MessageBox extends Block<MessageBoxProps> {
   constructor(props: MessageBoxProps) {
     super('div', props)
   }

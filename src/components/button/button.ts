@@ -3,7 +3,7 @@ import './button.scss'
 import {Block} from '../../core/block'
 import {ButtonProps} from '../../core/types'
 
-export class Button extends Block {
+export class Button extends Block<ButtonProps> {
   constructor(props: ButtonProps) {
     super('button', props)
   }

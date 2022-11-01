@@ -3,7 +3,7 @@ import {Block} from '../../core/block'
 import {ProfilePageProps} from '../../core/types'
 import './profilePage.scss'
 
-export class ProfilePage extends Block {
+export class ProfilePage extends Block<ProfilePageProps> {
   constructor(props: ProfilePageProps) {
     super('main', props)
   }

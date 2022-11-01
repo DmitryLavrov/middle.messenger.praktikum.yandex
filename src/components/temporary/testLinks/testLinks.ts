@@ -3,7 +3,7 @@ import {Block} from '../../../core/block'
 import {TestLinksProps} from '../../../core/types'
 import './testLinks.scss'
 
-export class TestLinks extends Block {
+export class TestLinks extends Block<TestLinksProps> {
   constructor(props: TestLinksProps = {}) {
     super('nav', props)
   }

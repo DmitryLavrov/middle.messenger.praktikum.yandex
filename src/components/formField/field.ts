@@ -3,7 +3,7 @@ import {Block} from '../../core/block'
 import {FieldProps} from '../../core/types'
 import './field.scss'
 
-export class Field extends Block {
+export class Field extends Block<FieldProps> {
   constructor(props: FieldProps) {
     super('div', props)
   }
