@@ -6,6 +6,11 @@
   box-sizing: inherit;
 }
 
+ul,
+ol {
+  list-style-type: none;
+}
+
 html {
   box-sizing: border-box;
   font-size: 2rem;
@@ -15,22 +20,23 @@ html {
   }
 }
 
-body {
+.body {
   position: relative;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 400;
   line-height: 1.6;
   color: var(--color-light-1);
   background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
   background-size: cover;
   background-repeat: no-repeat;
-
   min-height: 100vh;
-  //overflow: hidden;
+
+  // overflow: hidden;
   overflow-x: hidden;
 }
 
-input, button {
+input,
+button {
   font-size: inherit;
   border: none;
 }

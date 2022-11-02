@@ -11,6 +11,7 @@ npm init -y
 ```
 
 ### Installation
+#### Sprint 1
 
 ```shell
 ## create the file '.nvmrc'
@@ -18,11 +19,23 @@ $ node -v > .nvmrc
 
 ## client dependencies
 $ npm i -D parcel
-$ npm i -D handlebars
+$ npm i handlebars
 $ npm i -D sass ## optional (parcel includes sass out of the box)  
 
 ## server dependencies
-$ npm i -D express
+$ npm i express
+```
+
+#### Sprint 2
+```shell
+npm i -D typescript
+npm i -D eslint
+npm i -D eslint-config-airbnb
+npm i -D @typescript-eslint/parser
+npm i -D @typescript-eslint/eslint-plugin
+npm i -D stylelint
+npm i -D stylelint-config-standard
+npm i -D stylelint-config-standard-scss
 ```
 
 ## Design
@@ -43,6 +56,18 @@ $ npm run start
 
 ## Remove temporary folders
 $ npm run clear
+
+## Eslint check
+$ npm run eslint
+
+## Eslint fix
+$ npm run eslint-fix
+
+## Stylelint check
+$ npm run stylelint
+
+## Stylelint fix
+$ npm run stylelint-fix
 ```
 
 ## Deployment
