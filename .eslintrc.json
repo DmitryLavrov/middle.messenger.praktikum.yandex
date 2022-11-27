@@ -21,7 +21,16 @@
     "no-param-reassign": "off",
     "no-shadow": "off",
     "class-methods-use-this": "off",
-    "no-unused-expressions": "off"
+    "no-unused-expressions": "off",
+    "no-console": "off",
+    "no-throw-literal": "off",
+    "no-nested-ternary": "off",
+    "no-constructor-return": "off",
+    "func-names": "off",
+    "no-restricted-syntax": "off",
+    "radix": "off",
+    "no-prototype-builtins": "off",
+    "no-continue": "off"
   },
   "settings": {
     "react": {

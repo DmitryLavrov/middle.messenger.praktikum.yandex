@@ -1,0 +1,12 @@
+.chats-box {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.messenger-avatar {
+  width: 2rem;
+  height: 2rem;
+}
