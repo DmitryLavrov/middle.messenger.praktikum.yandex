@@ -28,14 +28,20 @@ $ npm i express
 
 #### Sprint 2
 ```shell
-npm i -D typescript
-npm i -D eslint
-npm i -D eslint-config-airbnb
-npm i -D @typescript-eslint/parser
-npm i -D @typescript-eslint/eslint-plugin
-npm i -D stylelint
-npm i -D stylelint-config-standard
-npm i -D stylelint-config-standard-scss
+$ npm i -D typescript
+$ npm i -D eslint
+$ npm i -D eslint-config-airbnb
+$ npm i -D @typescript-eslint/parser
+$ npm i -D @typescript-eslint/eslint-plugin
+$ npm i -D stylelint
+$ npm i -D stylelint-config-standard
+$ npm i -D stylelint-config-standard-scss
+```
+
+#### Sprint 3
+```shell
+## Testing
+$ npm i -D mocha @types/mocha chai @types/chai
 ```
 
 ## Design
