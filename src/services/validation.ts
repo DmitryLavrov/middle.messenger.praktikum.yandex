@@ -1,4 +1,4 @@
-import {FormData} from '../core/types'
+import {StringObject} from '../core/types'
 
 const validators = {
   first_name: {
@@ -21,8 +21,12 @@ const validators = {
     regex: /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,40}$/,
     message: 'Invalid password'
   },
+  passwordRepeated: {
+    regex: /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,40}$/,
+    message: 'Invalid password'
+  },
   phone: {
-    regex: /^\+?[0-9-]{10,15}$/,
+    regex: /^((8|\+7)[- ]?)?((\d{3})?[- ]?)?[\d\- ]{7,10}$/,
     message: 'Invalid phone number'
   },
   message: {
@@ -39,7 +43,7 @@ export const validateField = (fieldName: string, value: string): null | string =
   return null
 }
 
-export const validateForm = (formData: FormData = {}) => {
+export const validateForm = (formData: StringObject = {}) => {
   if (Object.entries(formData).every(([key, value]) => (validateField(key, value) === null))) {
     return null
   }

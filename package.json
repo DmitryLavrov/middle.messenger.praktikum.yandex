@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Yandex Practicum Chat",
   "scripts": {
-    "dev": "parcel ./static/*.html --port 3000",
-    "build": "parcel build ./static/*.html",
+    "dev": "parcel ./static/index.html --port 3000",
+    "build": "parcel build ./static/index.html",
     "start": "npm run build && node app.js",
     "clear": "rm -rf dist .parcel-cache",
     "eslint": "eslint . --ext=.js,.ts",
@@ -20,6 +20,7 @@
     "@parcel/resolver-glob": "^2.7.0",
     "@parcel/transformer-inline-string": "^2.7.0",
     "@parcel/transformer-sass": "^2.7.0",
+    "@parcel/validator-typescript": "^2.8.0",
     "@typescript-eslint/eslint-plugin": "^5.40.1",
     "@typescript-eslint/parser": "^5.40.1",
     "eslint": "^8.25.0",

@@ -1,0 +1,18 @@
+<h1 class="form-title">
+    {{title}}
+</h1>
+<form class="form">
+    <div class="form-error-message">Error message</div>
+
+    <div class="form-fields">
+        {{#each childFields}}
+            {{{childField}}}
+        {{/each}}
+    </div>
+
+    <div class="form-buttons">
+        {{#each childButtons}}
+            {{{childButton}}}
+        {{/each}}
+    </div>
+</form>

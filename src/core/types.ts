@@ -1,99 +1,68 @@
 import {Block} from './block'
+import {ProfilePage} from '../pages/form/profile/profile/profilePage'
+import {MessengerPage} from '../pages/messenger/messenger/messengerPage'
+import {LoginPage} from '../pages/form/login/login/loginPage'
+import {ChangeProfilePage} from '../pages/form/profile/changeProfile/changeProfilePage'
+import {RegisterPage} from '../pages/form/login/register/registerPage'
+import {ChatMenuPage} from '../components/messenger/currentChat/chatMenu/chatMenuPage'
+import {ChangeChatAvatarPage} from '../components/messenger/currentChat/changeChatAvatar/changeChatAvatarPage'
 
-export type Prop = string | (() => {}) | Block<Props> | Block<Props>[]
-export type Props = Record<string, Prop> | {}
-export type Children = Record<string, Block<Props>>
-export type ChildrenArray = Record<string, Block<Props>[]>
+export type BlockProp = string | number | boolean | ((event: Event) => void) | Block<BlockProps> | Block<BlockProps>[] | Block<BlockChildren> | Indexed | Indexed[] | null
+export type BlockProps = Record<string, BlockProp>
+// export type BlockChildren = Record<string, Block<BlockProps>>
+// export type BlockChildrenArray = Record<string, Block<BlockProps>[]>
+export type BlockChildren = Record<string, Block<BlockProps>>
+export type BlockChildrenArray = Record<string, Block<BlockProps>[]>
 
-export type FormData = Record<string, string>
-
-// Pages ---------------------------------------------------------
-export type ErrorPageProps = {
-  title: string
-  content: string
-  link: Block<Props>
-  attrClass?: string
-  testLinks?: Block<Props>
+export type BlockPropsWithChildren = {
+  children: BlockProps
+  childrenArray: BlockProps
 }
 
-export type ChatPageProps = {
-  messageBox: Block<Props>
-  attrClass?: string
-  testLinks?: Block<Props>
+export type BlockPage = LoginPage | ChangeProfilePage | RegisterPage | ProfilePage | MessengerPage | ChatMenuPage | ChangeChatAvatarPage
+export type BlockClass = (typeof LoginPage) | (typeof ChangeProfilePage) | (typeof RegisterPage) | (typeof ProfilePage)
+  | (typeof MessengerPage) | (typeof ChatMenuPage) | (typeof ChangeChatAvatarPage)
+
+export type Listeners = Record<string, Function[]>
+export type StringObject = Record<string, string>
+
+export type RouteProps = {
+  rootQuery: string
 }
 
-export type FormPageProps = {
-  form: Block<Props>
-  attrClass?: string
-  testLinks?: Block<Props>
+export type Indexed = {
+  [key in string]: unknown;
 }
 
-export type ProfilePageProps = {
-  form: Block<Props>
-  attrClass?: string
-  testLinks?: Block<Props>
+export type PlainObject<T = any> = {
+  [key in string]: T;
 }
 
-// Components ---------------------------------------------------
-export type TestLinksProps = {
-  attrClass?: string
+export type AnyObject = Record<string, any>
+
+export type RequestOptions = {
+  timeout?: number
+  method?: string
+  headers?: Record<string, string>
+  urlParams?: PlainObject
+  credentials?: boolean
+  body?: PlainObject
+  retries?: number
 }
 
-export type FormProps = {
-  title: string
-  fields: Block<Props>[]
-  buttons: Block<Props>[]
-  attrClass?: string
-  eventSubmit?: ()=>{}
+export interface ServerResponse {
+  status: number,
+  response?: PlainObject,
 }
 
-export type FieldProps = {
-  name?: string
-  label?: string
-  input: Block<Props>
-  attrClass?: string
+export interface ApiResponse {
+  status?: number,
+  errorMessage?: string
+  response?: PlainObject,
 }
 
-export type InputProps = {
-  attrId: string
-  attrName: string
-  attrValue?: string
-  attrType: string
-  attrPlaceholder?: string
-  attrReadonly?: string
-  attrClass?: string
-  eventFocus?: ()=>{}
-  eventBlur?: ()=>{}
-}
-
-export type MessageBoxProps = {
-  button: Block<Props>
-  form: Block<Props>
-  attrClass?: string
-}
-
-export type MessageFormProps = {
-  input: Block<Props>
-  button: Block<Props>
-  attrClass?: string
-  eventSubmit: ()=>{}
-}
-
-// Simple components ------------------------------------------------
-export type ButtonProps = {
-  attrType: string
-  label: string
-  eventClick?: () => {}
-}
-
-export type LinkProps = {
-  label: string
-  attrHref: string
-  attrClass?: string
-}
-
-export type InputReadOnlyProps = {
-  attrId: string
-  attrClass?: string
-  context: string
+export interface ControllerResponse {
+  status: number,
+  errorMessage?: string,
+  response?: PlainObject,
 }

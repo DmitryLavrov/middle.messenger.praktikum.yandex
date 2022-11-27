@@ -1,4 +1,4 @@
-import {Listeners, Prop} from './types'
+import {Listeners, BlockProp} from './types'
 
 export class EventBus {
   private readonly listeners: Listeners
@@ -17,7 +17,7 @@ export class EventBus {
 
   off(event: string, callback: Function) {
     if (!this.listeners[event]) {
-      throw new Error(`Event not found: ${event}`)
+      throw {errorMessage: `Event not found: ${event}`}
     }
 
     this.listeners[event] = this.listeners[event].filter(
@@ -25,11 +25,10 @@ export class EventBus {
     )
   }
 
-  emit(event: string, ...args: Prop[]) {
+  emit(event: string, ...args: BlockProp[]) {
     if (!this.listeners[event]) {
-      throw new Error(`Event not found: ${event}`)
+      throw {errorMessage: `Event not found: ${event}`}
     }
-
     this.listeners[event].forEach((listener) => listener(...args))
   }
 }
