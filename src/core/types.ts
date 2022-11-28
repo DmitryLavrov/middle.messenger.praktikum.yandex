@@ -9,15 +9,8 @@ import {ChangeChatAvatarPage} from '../components/messenger/currentChat/changeCh
 
 export type BlockProp = string | number | boolean | ((event: Event) => void) | Block<BlockProps> | Block<BlockProps>[] | Block<BlockChildren> | Indexed | Indexed[] | null
 export type BlockProps = Record<string, BlockProp>
-// export type BlockChildren = Record<string, Block<BlockProps>>
-// export type BlockChildrenArray = Record<string, Block<BlockProps>[]>
 export type BlockChildren = Record<string, Block<BlockProps>>
 export type BlockChildrenArray = Record<string, Block<BlockProps>[]>
-
-export type BlockPropsWithChildren = {
-  children: BlockProps
-  childrenArray: BlockProps
-}
 
 export type BlockPage = LoginPage | ChangeProfilePage | RegisterPage | ProfilePage | MessengerPage | ChatMenuPage | ChangeChatAvatarPage
 export type BlockClass = (typeof LoginPage) | (typeof ChangeProfilePage) | (typeof RegisterPage) | (typeof ProfilePage)
@@ -30,39 +23,22 @@ export type RouteProps = {
   rootQuery: string
 }
 
-export type Indexed = {
-  [key in string]: unknown;
-}
-
-export type PlainObject<T = any> = {
+export type Indexed<T = any> = {
   [key in string]: T;
 }
-
-export type AnyObject = Record<string, any>
 
 export type RequestOptions = {
   timeout?: number
   method?: string
   headers?: Record<string, string>
-  urlParams?: PlainObject
+  urlParams?: Indexed
   credentials?: boolean
-  body?: PlainObject
+  body?: Indexed
   retries?: number
 }
 
-export interface ServerResponse {
-  status: number,
-  response?: PlainObject,
-}
-
-export interface ApiResponse {
+export type ResponseController = {
   status?: number,
-  errorMessage?: string
-  response?: PlainObject,
-}
-
-export interface ControllerResponse {
-  status: number,
   errorMessage?: string,
-  response?: PlainObject,
+  response?: Indexed,
 }

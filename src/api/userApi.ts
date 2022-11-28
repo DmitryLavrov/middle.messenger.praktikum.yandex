@@ -1,17 +1,17 @@
 import {BaseApi} from './baseApi'
 import {fetchWithMethod} from '../services/httpTransport'
-import {PlainObject} from '../core/types'
+import {Indexed} from '../core/types'
 
 class UserApi extends BaseApi {
-  override updateProfile(body: PlainObject) {
+  override updateProfile(body: Indexed) {
     return fetchWithMethod.put('/user/profile', {body})
   }
 
-  override updateAvatar(body: PlainObject) {
+  override updateAvatar(body: Indexed) {
     return fetchWithMethod.put('/user/profile/avatar', {body, headers: {}})
   }
 
-  override updatePassword(body: PlainObject) {
+  override updatePassword(body: Indexed) {
     return fetchWithMethod.put('/user/password', {body})
   }
 
@@ -19,7 +19,7 @@ class UserApi extends BaseApi {
     throw new Error('Not implemented')
   }
 
-  override userByLogin(body: PlainObject) {
+  override userByLogin(body: Indexed) {
     return fetchWithMethod.post('/user/search', {body})
   }
 }

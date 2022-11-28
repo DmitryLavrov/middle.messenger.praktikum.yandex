@@ -9,10 +9,6 @@ class SocketController {
   private _connected: boolean
 
   start(userId: number, chatId: number, token: string) {
-    if (userId === store.getState().user?.id && chatId === store.getState().currentChat?.chatId) {
-      return
-    }
-
     this._socketApi?.removeEvents()
 
     this._socketApi = new SocketApi(`${SOCKET_URL}${userId}/${chatId}/${token}`)
@@ -69,8 +65,11 @@ class SocketController {
         store.setState('messages', messages.reverse())
       } else if (data.type === 'message') {
         const messages = store.getState().messages ?? []
+        const user = store.getState().currentChat?.users?.find(user => user.id === data.user_id)
         messages.push({
-          isMine: true,
+          isMine: data.user_id === store.getState().user?.id,
+          avatar: user?.avatar,
+          displayName: user?.display_name ?? `${user?.first_name ?? ''} ${user?.second_name ?? ''}`,
           content: data.content,
           time: data.time
         })

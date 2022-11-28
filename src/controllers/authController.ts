@@ -1,10 +1,10 @@
 import {authApi} from '../api/authApi'
-import {PlainObject} from '../core/types'
+import {Indexed} from '../core/types'
 import {store} from '../services/store/store'
 import {handleStatus, returnError} from './helpersController'
 
 export class AuthController {
-  register(body: PlainObject) {
+  register(body: Indexed) {
     return authApi.register(body)
       .then(({status, response}) => handleStatus({status, response}))
       .then(({status}) => {
@@ -14,7 +14,7 @@ export class AuthController {
       .catch(({status, errorMessage}) => returnError({status, errorMessage}))
   }
 
-  login(body: PlainObject) {
+  login(body: Indexed) {
     return authApi.login(body)
       .then(({status, response}) => handleStatus({status, response}))
       .then(({status}) => {

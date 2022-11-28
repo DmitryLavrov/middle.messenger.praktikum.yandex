@@ -2,20 +2,17 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  justify-content: end;
   gap: 0.5rem;
   width: 100%;
   overflow-y: auto;
 }
 
 .messages {
+  justify-content: end;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
   flex-grow: 1;
-  justify-content: end;
-  width: 100%;
-  height: 100%;
   overflow-y: auto;
 
   &::-webkit-scrollbar {

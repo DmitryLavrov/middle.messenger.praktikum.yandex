@@ -16,7 +16,6 @@ export const chatMenuProps = (): FormPageProps => ({
         attrType: 'button',
         onClick: (event) => {
           event.preventDefault()
-          console.log('Add user', event.target)
           router.go('/messenger/chatMenu/addUser')
         }
       }),
@@ -26,7 +25,6 @@ export const chatMenuProps = (): FormPageProps => ({
         attrClass: 'button',
         onClick: (event) => {
           event.preventDefault()
-          console.log('Delete User', event.target)
           router.go('/messenger/chatMenu/deleteUser')
         }
       }),

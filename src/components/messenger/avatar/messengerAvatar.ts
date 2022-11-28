@@ -1,6 +1,6 @@
 import tmpl from './messengerAvatar.hbs'
 import {Block} from '../../../core/block'
-import {BlockProps, ControllerResponse} from '../../../core/types'
+import {BlockProps} from '../../../core/types'
 import './messengerAvatar.scss'
 import {withUser} from '../../../services/store/storeHoc'
 import {authController} from '../../../controllers/authController'
@@ -13,14 +13,10 @@ class MessengerAvatar extends Block<MessengerAvatarProps> {
     super({...props, tagName: 'div'})
   }
 
-  componentDidMount(): void {
-    authController.getUserInfo()
-      .then(({status}: ControllerResponse) => {
-        if (status === 200) {
-          this.setProps(messengerAvatarProps(this.props.user))
-          this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
-        }
-      })
+  async componentDidMount() {
+    await authController.getUserInfo()
+    this.setProps(messengerAvatarProps(this.props.user))
+    this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
   }
 
   componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): boolean {

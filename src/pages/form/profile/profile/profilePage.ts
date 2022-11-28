@@ -1,6 +1,6 @@
 import tmpl from './profilePage.hbs'
 import {Block} from '../../../../core/block'
-import {BlockClass, BlockProps, ControllerResponse} from '../../../../core/types'
+import {BlockClass, BlockProps} from '../../../../core/types'
 import './profilePage.scss'
 import {withUser} from '../../../../services/store/storeHoc'
 import {profileProps} from './profileProps'
@@ -13,22 +13,14 @@ export class ProfilePage extends Block<ProfileProps> {
     super({...props, tagName: 'main'})
   }
 
-  componentDidMount(): void {
-    authController.getUserInfo()
-      .then(({status, errorMessage}: ControllerResponse) => {
-        if (status === 200) {
-          this.setProps(profileProps(this.props.user))
-          this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
-        } else {
-          //--------------------------
-          console.log(errorMessage ?? 'We\'ve got an error!')
-          //--------------------------
-        }
-      })
+  async componentDidMount() {
+    await authController.getUserInfo()
+    this.setProps(profileProps(this.props.user))
+    this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
   }
 
   componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): boolean {
-    if (!isEqual(oldProps?.user, newProps.user)) {
+    if (!isEqual(oldProps.user, newProps.user)) {
       this.setProps(profileProps(this.props.user))
       return true
     }

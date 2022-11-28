@@ -1,10 +1,10 @@
-import {PlainObject} from '../core/types'
+import {Indexed} from '../core/types'
 import {store} from '../services/store/store'
 import {handleStatus, returnError} from './helpersController'
 import {chatApi} from '../api/chatsApi'
 
 export class ChatsController {
-  getChats(urlParams: PlainObject) {
+  getChats(urlParams: Indexed) {
     return chatApi.getChats(urlParams)
       .then(({status, response}) => handleStatus({status, response}))
       .then(({status, response}) => {
@@ -14,7 +14,7 @@ export class ChatsController {
       .catch(({status, errorMessage}) => returnError({status, errorMessage}))
   }
 
-  createChat(body: PlainObject) {
+  createChat(body: Indexed) {
     return chatApi.createChat(body)
       .then(({status, response}) => handleStatus({status, response}))
       .then(({status, response}) => {
@@ -24,7 +24,7 @@ export class ChatsController {
       .catch(({status, errorMessage}) => returnError({status, errorMessage}))
   }
 
-  uploadChatAvatar(body: PlainObject) {
+  uploadChatAvatar(body: Indexed) {
     return chatApi.uploadChatAvatar(body)
       .then(({status, response}) => handleStatus({status, response}))
       .then(({status, response}) => {
@@ -34,7 +34,7 @@ export class ChatsController {
       .catch(({status, errorMessage}) => returnError({status, errorMessage}))
   }
 
-  deleteChat(body: PlainObject) {
+  deleteChat(body: Indexed) {
     return chatApi.deleteChat(body)
       .then(({status, response}) => handleStatus({status, response}))
       .then(({status, response}) => {
@@ -44,7 +44,7 @@ export class ChatsController {
       .catch(({status, errorMessage}) => returnError({status, errorMessage}))
   }
 
-  addUsersToChat(body: PlainObject) {
+  addUsersToChat(body: Indexed) {
     return chatApi.addUsersToChat(body)
       .then(({status, response}) => handleStatus({status, response}))
       .then(({status, response}) => {
@@ -67,7 +67,7 @@ export class ChatsController {
       .catch(({status, errorMessage}) => returnError({status, errorMessage}))
   }
 
-  deleteUsersFromChat(body: PlainObject) {
+  deleteUsersFromChat(body: Indexed) {
     return chatApi.deleteUsersFromChat(body)
       .then(({status, response}) => handleStatus({status, response}))
       .then(({status, response}) => {

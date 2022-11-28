@@ -9,7 +9,7 @@ export class AddUserToChat extends Block<FormPageProps> {
     super({...props, tagName: 'main'})
   }
 
-  componentDidMount(): void {
+  componentDidMount() {
     this.setProps(addUserToChatProps())
     this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
   }
@@ -18,5 +18,3 @@ export class AddUserToChat extends Block<FormPageProps> {
     return this.compile(tmpl)
   }
 }
-
-// export const ChangeChatAvatarPageWithCurrentChat = withCurrentChat(ChangeChatAvatarPage) as BlockClass

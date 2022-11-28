@@ -70,7 +70,7 @@ export abstract class Block<T extends BlockProps> {
         element.setAttribute(attributeName, value as string)
       })
 
-    // dataChatId -->
+    // dataChatid --> [data-chatid]
     Object.entries(this.props)
       .filter(([key]) => key.startsWith(DATA_PREFIX))
       .forEach(([key, value]) => {
@@ -119,8 +119,6 @@ export abstract class Block<T extends BlockProps> {
     Object.assign(this.props, props)
     Object.assign(this.children, children)
     Object.assign(this.childrenArray, childrenArray)
-
-    // this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
   }
 
   // =====================================================================
@@ -183,16 +181,6 @@ export abstract class Block<T extends BlockProps> {
         this.eventBus.emit(Block.EVENTS.FLOW_CDU, oldTarget as BlockProps, target)
         return true
       }
-
-      // deleteProperty: (target: BlockProps, prop: string) => {
-      //   if (prop.indexOf('_') === 0) {
-      //     throw new Error('Access denied')
-      //   }
-      //   const oldProps = target[prop]
-      //   delete target[prop]
-      //   this.eventBus.emit(Block.EVENTS.FLOW_CDU, oldProps, target[prop])
-      //   return true
-      // }
     })
   }
 
@@ -219,7 +207,6 @@ export abstract class Block<T extends BlockProps> {
   // =====================================================================
   // COMPILE
   compile(tmpl: string, props: BlockProps | {} = {}) {
-    // const propsAndStubs: BlockProps | {} = {...props}
     const propsAndStubs: BlockProps | {} = deepClone(props)
 
     // Make stubs for children
