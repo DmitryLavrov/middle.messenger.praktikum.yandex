@@ -11,7 +11,7 @@ export class ChangeChatAvatarPage extends Block<ChatProps> {
     super({...props, tagName: 'main'})
   }
 
-  componentDidMount(): void {
+  componentDidMount() {
     this.setProps(changeChatAvatarProps())
     this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
   }

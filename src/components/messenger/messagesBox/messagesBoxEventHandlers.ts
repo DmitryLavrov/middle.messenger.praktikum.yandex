@@ -17,8 +17,6 @@ export const sendMessage = (event: Event): void => {
     showErrorElement(null, validateResult)
     return
   }
-  // eslint-disable-next-line no-console
-  console.log('Form data:', formData)
   socketController.sendMessage(formData.message)
   element.reset()
 }

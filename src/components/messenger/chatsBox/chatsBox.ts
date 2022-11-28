@@ -1,6 +1,6 @@
 import tmpl from './chatsBox/chatsBox.hbs'
 import {Block} from '../../../core/block'
-import {BlockProps, ControllerResponse} from '../../../core/types'
+import {BlockProps} from '../../../core/types'
 import './chatsBox/chatsBox.scss'
 import {withChats} from '../../../services/store/storeHoc'
 import {chatsController} from '../../../controllers/chatsController'
@@ -14,14 +14,10 @@ export class ChatsBox extends Block<ChatsBoxProps> {
     super({...props, tagName: 'div'})
   }
 
-  componentDidMount(): void {
-    chatsController.getChats({offset: 0, limit: 10})
-      .then(({status}: ControllerResponse) => {
-        if (status === 200) {
-          this.setProps(chatsBoxProps(this.props.chats as Chats))
-          this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
-        }
-      })
+  async componentDidMount() {
+    await chatsController.getChats({offset: 0, limit: 10})
+    this.setProps(chatsBoxProps(this.props.chats as Chats))
+    this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
   }
 
   componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): boolean {

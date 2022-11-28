@@ -12,13 +12,13 @@ export class LoginPage extends Block<FormPageProps> {
     super({...props, tagName: 'main'})
   }
 
-  componentDidMount(): void {
+  componentDidMount() {
     this.setProps(loginProps())
     this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
   }
 
   componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): boolean {
-    if (!isEqual(oldProps?.user, newProps.user)) {
+    if (!isEqual(oldProps.user, newProps.user)) {
       this.setProps(loginProps())
       return true
     }

@@ -1,6 +1,6 @@
 import tmpl from '../../common/formPage.hbs'
 import {Block} from '../../../../core/block'
-import {BlockClass, BlockProps, ControllerResponse} from '../../../../core/types'
+import {BlockClass, BlockProps} from '../../../../core/types'
 import '../../common/formPage.scss'
 import {isEqual} from '../../../../utils/helpers'
 import {authController} from '../../../../controllers/authController'
@@ -13,18 +13,14 @@ export class ChangeAvatarPage extends Block<ProfileProps> {
     super({...props, tagName: 'main'})
   }
 
-  componentDidMount(): void {
-    authController.getUserInfo()
-      .then(({status}: ControllerResponse) => {
-        if (status === 200) {
-          this.setProps(changeAvatarProps())
-          this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
-        }
-      })
+  async componentDidMount() {
+    await authController.getUserInfo()
+    this.setProps(changeAvatarProps())
+    this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
   }
 
   componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): boolean {
-    if (!isEqual(oldProps?.user, newProps.user)) {
+    if (!isEqual(oldProps.user, newProps.user)) {
       this.setProps(changeAvatarProps())
       return true
     }

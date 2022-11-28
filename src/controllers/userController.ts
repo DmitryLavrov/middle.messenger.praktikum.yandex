@@ -1,27 +1,27 @@
-import {PlainObject} from '../core/types'
+import {Indexed} from '../core/types'
 import {userApi} from '../api/userApi'
 import {handleStatus, returnError} from './helpersController'
 
 export class UserController {
-  updateProfile(body: PlainObject) {
+  updateProfile(body: Indexed) {
     return userApi.updateProfile(body)
       .then(({status, response}) => handleStatus({status, response}))
       .catch(({status, errorMessage}) => returnError({status, errorMessage}))
   }
 
-  updatePassword(body: PlainObject) {
+  updatePassword(body: Indexed) {
     return userApi.updatePassword({oldPassword: body.oldPassword, newPassword: body.password})
       .then(({status, response}) => handleStatus({status, response}))
       .catch(({status, errorMessage}) => returnError({status, errorMessage}))
   }
 
-  updateAvatar(body: PlainObject) {
+  updateAvatar(body: Indexed) {
     return userApi.updateAvatar(body)
       .then(({status, response}) => handleStatus({status, response}))
       .catch(({status, errorMessage}) => returnError({status, errorMessage}))
   }
 
-  userByLogin(body: PlainObject) {
+  async userByLogin(body: Indexed) {
     return userApi.userByLogin(body)
       .then(({status, response}) => handleStatus({status, response}))
       .catch(({status, errorMessage}) => returnError({status, errorMessage}))

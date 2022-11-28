@@ -1,13 +1,13 @@
 import {BaseApi} from './baseApi'
 import {fetchWithMethod} from '../services/httpTransport'
-import {PlainObject} from '../core/types'
+import {Indexed} from '../core/types'
 
 class AuthApi extends BaseApi {
-  override register(body: PlainObject) {
+  override register(body: Indexed) {
     return fetchWithMethod.post('/auth/signup', {body})
   }
 
-  override login(body: PlainObject) {
+  override login(body: Indexed) {
     return fetchWithMethod.post('/auth/signin', {body})
   }
 

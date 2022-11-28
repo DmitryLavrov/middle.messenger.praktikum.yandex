@@ -1,5 +1,5 @@
 import {Block} from '../core/block'
-import {AnyObject, BlockProps, Indexed} from '../core/types'
+import {BlockProps, Indexed} from '../core/types'
 
 // =====================================================================
 // render(query, block)
@@ -21,74 +21,6 @@ export function render(query: string, block: Block<BlockProps> | null) {
 
 // =====================================================================
 // isEqual(lhs, rhs)
-// Compare objects
-// function isPlainObject(value: unknown): value is PlainObject {
-//   return typeof value === 'object'
-//     && value !== null
-//     && value.constructor === Object
-//     && Object.prototype.toString.call(value) === '[object Object]'
-// }
-//
-// function isArray(value: unknown): value is [] {
-//   return Array.isArray(value)
-// }
-//
-// function isArrayOrObject(value: unknown): value is [] | PlainObject {
-//   return isPlainObject(value) || isArray(value)
-// }
-//
-// export function isEqual(lhs: PlainObject, rhs: PlainObject) {
-//   if (lhs === undefined && rhs === undefined) {
-//     return true
-//   }
-//
-//   if (lhs === null && rhs === null) {
-//     return true
-//   }
-//
-//   if (Object.keys(lhs).length !== Object.keys(rhs).length) {
-//     return false
-//   }
-//
-//   for (const [key, value] of Object.entries(lhs)) {
-//     const rightValue = rhs[key]
-//     if (isArrayOrObject(value) && isArrayOrObject(rightValue)) {
-//       if (isEqual(value, rightValue)) {
-//         continue
-//       }
-//       return false
-//     }
-//
-//     if (value !== rightValue) {
-//       return false
-//     }
-//   }
-//
-//   return true
-// }
-
-// export function isEqual2(lhs: any, rhs: any) {
-//   if (lhs === undefined && rhs === undefined) {
-//     return true
-//   }
-//
-//   if (lhs === null && rhs === null) {
-//     return true
-//   }
-//
-//   if ((typeof lhs === 'string' && typeof rhs === 'string') ||
-//     (typeof lhs === 'number' && typeof rhs === 'number') ||
-//     (typeof lhs === 'boolean' && typeof rhs === 'boolean')) {
-//     return lhs === lhs
-//   }
-//
-//   if (typeof lhs === 'object' && typeof rhs === 'object') {
-//     return JSON.stringify(lhs) === JSON.stringify(rhs)
-//   }
-//
-//   return false
-// }
-
 export function isEqual(lhs: any, rhs: any) {
   if (typeof lhs === 'object' && typeof rhs === 'object') {
     return JSON.stringify(lhs) === JSON.stringify(rhs)
@@ -101,7 +33,7 @@ export function isEqual(lhs: any, rhs: any) {
 // queryStringify(data)
 // На входе: объект. Пример: {a: 1, b: 2, c: {d: 123}, k: [1, 2, 3]}
 // На выходе: строка. Пример: ?a=1&b=2&c=[object Object]&k=1,2,3
-export function queryStringify(data: AnyObject) {
+export function queryStringify(data: Indexed) {
   const pairs = Object.entries(data).map(
     ([key, val]) => (`${key}=${val}`)
   )
@@ -148,94 +80,6 @@ export function set(object: Indexed | unknown, path: string, value: unknown): In
 }
 
 // =====================================================================
-// deepClone(object)
-// export function deepClone(obj: any, hash = new WeakMap()):any {
-//   if (Object(obj) !== obj) return obj; // primitives
-//   if (hash.has(obj)) return hash.get(obj); // cyclic reference
-//   const result = obj instanceof Set ? new Set(obj) // See note about this!
-//     : obj instanceof Map ? new Map(Array.from(obj, ([key, val]) =>
-//         [key, deepClone(val, hash)]))
-//       : obj instanceof Date ? new Date(obj)
-//         // : obj instanceof RegExp ? new RegExp(obj.source, obj.flags)
-//           // ... add here any specific treatment for other classes ...
-//           // and finally a catch-all:
-//           // : obj.constructor ? new obj.constructor()
-//             : Object.create(null);
-//   hash.set(obj, result);
-//   return Object.assign(result, ...Object.keys(obj).map(
-//     key => ({ [key]: deepClone(obj[key], hash) }) ));
-// }
-// export function deepClone<T extends object = object>(obj: T) {
-//   return (function _cloneDeep(item: T): T | Date | Set<unknown> | Map<unknown, unknown> | object | T[] {
-//     // Handle:
-//     // * null
-//     // * undefined
-//     // * boolean
-//     // * number
-//     // * string
-//     // * symbol
-//     // * function
-//     if (item === null || typeof item !== 'object') {
-//       return item
-//     }
-//
-//     // Handle:
-//     // * Date
-//     if (item instanceof Date) {
-//       return new Date(item.valueOf())
-//     }
-//
-//     // Handle:
-//     // * Array
-//     if (item instanceof Array) {
-//       let copy = []
-//
-//       item.forEach((_, i) => (copy[i] = _cloneDeep(item[i])))
-//
-//       return copy
-//     }
-//
-//     // Handle:
-//     // * Set
-//     if (item instanceof Set) {
-//       let copy = new Set()
-//
-//       item.forEach(v => copy.add(_cloneDeep(v)))
-//
-//       return copy
-//     }
-//
-//     // Handle:
-//     // * Map
-//     if (item instanceof Map) {
-//       let copy = new Map()
-//
-//       item.forEach((v, k) => copy.set(k, _cloneDeep(v)))
-//
-//       return copy
-//     }
-//
-//     // Handle:
-//     // * Object
-//     if (item instanceof Object) {
-//       let copy: object = {}
-//
-//       // Handle:
-//       // * Object.symbol
-//       Object.getOwnPropertySymbols(item).forEach(s => (copy[s] = _cloneDeep(item[s])))
-//
-//       // Handle:
-//       // * Object.name (other)
-//       Object.keys(item).forEach(k => (copy[k] = _cloneDeep(item[k])))
-//
-//       return copy
-//     }
-//
-//     throw new Error(`Unable to copy object: ${item}`)
-//   })(obj)
-// }
-
-// =====================================================================
 // deepClone(any)
 export function deepClone(value: any): any {
   if (typeof value === 'object') {
@@ -247,8 +91,6 @@ export function deepClone(value: any): any {
 // =====================================================================
 // timeToRenderString(timeStr)
 export function timeToRenderString(timeStr: string | undefined): string {
-  // const startNum = typeof start === 'string' ? Number(start) : start
-  // const interval = end - startNum
   if (timeStr === undefined) {
     return ''
   }
@@ -272,5 +114,3 @@ export function timeToRenderString(timeStr: string | undefined): string {
   if (diffDays < 365) return `${days}.${months}`
   return `${days}.${months}.${years}`
 }
-
-//

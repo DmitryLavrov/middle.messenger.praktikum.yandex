@@ -1,4 +1,4 @@
-import {StringObject, ControllerResponse} from '../core/types'
+import {StringObject} from '../core/types'
 import {validateField, validateForm} from './validation'
 import {hideErrorElement, showErrorElement} from './errorHandlers'
 import {authController} from '../controllers/authController'
@@ -6,7 +6,7 @@ import {router} from './router'
 import {userController} from '../controllers/userController'
 import {chatsController} from '../controllers/chatsController'
 
-export const submitRegister = (event: Event): void => {
+export const submitRegister = async (event: Event) => {
   event.preventDefault()
   const element = event.target as HTMLFormElement
   const formData: StringObject = {}
@@ -20,16 +20,15 @@ export const submitRegister = (event: Event): void => {
   const validateResult = validateForm(formData)
   if (validateResult !== null) {
     showErrorElement(errorElement, validateResult, 5000)
-  } else {
-    authController.register(formData)
-      .then(({status, errorMessage}: ControllerResponse) => {
-        if (status === 200) {
-          element.reset()
-          router.go('/messenger')
-        } else {
-          showErrorElement(errorElement, errorMessage ?? 'We\'ve got an error!', 5000)
-        }
-      })
+    return
+  }
+
+  try {
+    await authController.register(formData)
+    element.reset()
+    router.go('/messenger')
+  } catch ({status, errorMessage}) {
+    showErrorElement(errorElement, errorMessage ?? 'We\'ve got an error!', 5000)
   }
 }
 
@@ -47,80 +46,53 @@ export const submitLogin = async (event: Event) => {
   const validateResult = validateForm(formData)
   if (validateResult !== null) {
     showErrorElement(errorElement, validateResult, 5000)
-  } else {
-    authController.login(formData)
-      .then(({status, errorMessage}: ControllerResponse) => {
-        if ((status === 200) || (status === 400 && errorMessage === 'User already in system')) {
-          element.reset()
-          router.go('/messenger')
-        } else {
-          showErrorElement(errorElement, errorMessage ?? 'We\'ve got an error!', 5000)
-        }
-      })
+    return
+  }
+
+  try {
+    await authController.login(formData)
+    element.reset()
+    router.go('/messenger')
+  } catch ({status, errorMessage}) {
+    showErrorElement(errorElement, errorMessage ?? 'We\'ve got an error!', 5000)
   }
 }
 
-export const logout = (event: Event): void => {
+export const logout = async (event: Event) => {
   const element = event.target as HTMLElement
   const errorElement = (element.parentElement?.parentElement?.parentElement?.querySelector('.form-error-message')) as HTMLElement
 
-  authController.logout()
-    .then(({status, errorMessage}: ControllerResponse) => {
-      if (status === 200) {
-        router.go('/')
-      } else {
-        showErrorElement(errorElement, errorMessage ?? 'We\'ve got an error!', 5000)
-      }
-    })
-}
-
-export const goSettings = (event: Event): void => {
-  event.preventDefault()
-  authController.getUserInfo()
-    .then(({status}: ControllerResponse) => {
-      if (status === 200) {
-        router.go('/settings')
-      }
-    })
-}
-
-export const goChangeAvatar = (event: Event): void => {
-  event.preventDefault()
-  authController.getUserInfo()
-    .then(({status}: ControllerResponse) => {
-      if (status === 200) {
-        router.go('/settings/changeAvatar')
-      }
-    })
-}
-
-export const submitChangeProfile = (event: Event): void => {
-  event.preventDefault()
-  const element = event.target as HTMLFormElement
-  const formData: StringObject = {}
-  const fields = element.querySelectorAll('input')
-  fields?.forEach((input: HTMLInputElement) => {
-    formData[input.name] = input.value
-  })
-
-  const errorElement = (element.querySelector('.form-error-message')) as HTMLElement
-
-  const validateResult = validateForm(formData)
-  if (validateResult !== null) {
-    showErrorElement(errorElement, validateResult, 5000)
-  } else {
-    userController.updateProfile(formData)
-      .then(({status, errorMessage}: ControllerResponse) => {
-        if (status === 200) {
-          router.go('/settings')
-        } else {
-          showErrorElement(errorElement, errorMessage ?? 'We\'ve got an error!', 5000)
-        }
-      })
+  try {
+    await authController.logout()
+    router.go('/')
+  } catch ({status, errorMessage}) {
+    showErrorElement(errorElement, errorMessage ?? 'We\'ve got an error!', 5000)
   }
 }
 
-export const submitChangePassword = (event: Event): void => {
+export const goSettings = async (event: Event) => {
+  event.preventDefault()
+
+  try {
+    await authController.getUserInfo()
+    router.go('/settings')
+  } catch ({status, errorMessage}) {
+    showErrorElement(null, errorMessage ?? 'We\'ve got an error!', 5000)
+  }
+}
+
+export const goChangeAvatar = async (event: Event) => {
+  event.preventDefault()
+
+  try {
+    await authController.getUserInfo()
+    router.go('/settings/changeAvatar')
+  } catch ({status, errorMessage}) {
+    showErrorElement(null, errorMessage ?? 'We\'ve got an error!', 5000)
+  }
+}
+
+export const submitChangeProfile = async (event: Event) => {
   event.preventDefault()
   const element = event.target as HTMLFormElement
   const formData: StringObject = {}
@@ -134,15 +106,39 @@ export const submitChangePassword = (event: Event): void => {
   const validateResult = validateForm(formData)
   if (validateResult !== null) {
     showErrorElement(errorElement, validateResult, 5000)
-  } else {
-    userController.updatePassword(formData)
-      .then(({status, errorMessage}: ControllerResponse) => {
-        if (status === 200) {
-          router.go('/settings')
-        } else {
-          showErrorElement(errorElement, errorMessage ?? 'We\'ve got an error!', 5000)
-        }
-      })
+    return
+  }
+
+  try {
+    await userController.updateProfile(formData)
+    router.go('/settings')
+  } catch ({status, errorMessage}) {
+    showErrorElement(null, errorMessage ?? 'We\'ve got an error!', 5000)
+  }
+}
+
+export const submitChangePassword = async (event: Event) => {
+  event.preventDefault()
+  const element = event.target as HTMLFormElement
+  const formData: StringObject = {}
+  const fields = element.querySelectorAll('input')
+  fields?.forEach((input: HTMLInputElement) => {
+    formData[input.name] = input.value
+  })
+
+  const errorElement = (element.querySelector('.form-error-message')) as HTMLElement
+
+  const validateResult = validateForm(formData)
+  if (validateResult !== null) {
+    showErrorElement(errorElement, validateResult, 5000)
+    return
+  }
+
+  try {
+    await userController.updatePassword(formData)
+    router.go('/settings')
+  } catch ({status, errorMessage}) {
+    showErrorElement(null, errorMessage ?? 'We\'ve got an error!', 5000)
   }
 }
 
@@ -160,16 +156,20 @@ export const submitNewChat = async (event: Event) => {
   const validateResult = validateForm(formData)
   if (validateResult !== null) {
     showErrorElement(errorElement, validateResult, 5000)
-  } else {
-    chatsController.createChat(formData)
-      .then(({status, errorMessage}: ControllerResponse) => {
-        if ((status === 200) || (status === 400 && errorMessage === 'User already in system')) {
-          element.reset()
-          router.go('/messenger')
-        } else {
-          showErrorElement(errorElement, errorMessage ?? 'We\'ve got an error!', 5000)
-        }
-      })
+    return
+  }
+
+  try {
+    await chatsController.createChat(formData)
+    element.reset()
+    router.go('/messenger')
+  } catch ({status, errorMessage}) {
+    if (status === 400 && errorMessage === 'User already in system') {
+      element.reset()
+      router.go('/messenger')
+    } else {
+      showErrorElement(null, errorMessage ?? 'We\'ve got an error!', 5000)
+    }
   }
 }
 

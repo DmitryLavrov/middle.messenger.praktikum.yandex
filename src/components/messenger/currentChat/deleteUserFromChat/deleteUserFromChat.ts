@@ -9,7 +9,7 @@ export class DeleteUserFromChat extends Block<FormPageProps> {
     super({...props, tagName: 'main'})
   }
 
-  componentDidMount(): void {
+  componentDidMount() {
     this.setProps(deleteUserFromChatProps())
     this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
   }

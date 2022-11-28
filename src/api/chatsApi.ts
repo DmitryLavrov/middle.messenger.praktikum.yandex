@@ -1,37 +1,37 @@
 import {BaseApi} from './baseApi'
 import {fetchWithMethod} from '../services/httpTransport'
-import {PlainObject} from '../core/types'
+import {Indexed} from '../core/types'
 
 class ChatsApi extends BaseApi {
-  getChats(urlParams: PlainObject) {
+  getChats(urlParams: Indexed) {
     return fetchWithMethod.get('/chats', {urlParams})
   }
 
-  createChat(body: PlainObject) {
+  createChat(body: Indexed) {
     return fetchWithMethod.post('/chats', {body})
   }
 
-  deleteChat(body: PlainObject) {
+  deleteChat(body: Indexed) {
     return fetchWithMethod.delete('/chats', {body})
   }
 
-  getUsersByChatId(chatId: number, urlParams: PlainObject) {
+  getUsersByChatId(chatId: number, urlParams: Indexed) {
     return fetchWithMethod.get(`/chats/${chatId}/users`, {urlParams})
   }
 
-  getUnreadCount(body: PlainObject) {
+  getUnreadCount(body: Indexed) {
     return fetchWithMethod.get(`/chats/new/${body.id}`, {body})
   }
 
-  uploadChatAvatar(body: PlainObject) {
+  uploadChatAvatar(body: Indexed) {
     return fetchWithMethod.put('/chats/avatar', {body, headers: {}})
   }
 
-  addUsersToChat(body: PlainObject) {
+  addUsersToChat(body: Indexed) {
     return fetchWithMethod.put('/chats/users', {body})
   }
 
-  deleteUsersFromChat(body: PlainObject) {
+  deleteUsersFromChat(body: Indexed) {
     return fetchWithMethod.delete('/chats/users', {body})
   }
 

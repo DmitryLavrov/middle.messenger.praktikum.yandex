@@ -9,7 +9,7 @@ export class ChatMenuPage extends Block<FormPageProps> {
     super({...props, tagName: 'main'})
   }
 
-  componentDidMount(): void {
+  componentDidMount() {
     this.setProps(chatMenuProps())
     this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
   }

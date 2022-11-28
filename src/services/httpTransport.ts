@@ -1,10 +1,10 @@
 import {queryStringify} from '../utils/helpers'
-import {RequestOptions} from '../core/types'
+import {RequestOptions, ResponseController} from '../core/types'
 
 type HttpMethod = (
   url: string,
   options?: RequestOptions
-) => Promise<unknown>
+) => Promise<ResponseController>
 
 enum METHODS {
   GET = 'GET',
@@ -73,7 +73,7 @@ export class HttpTransport {
       } else {
         xhr.send(body as XMLHttpRequestBodyInit)
       }
-    })
+    }) as Promise<ResponseController>
   }
 }
 

@@ -30,4 +30,3 @@ export class MessengerPage extends Block<MessengerProps> {
 }
 
 export const MessengerPageWithChats = withUser(withMessages(withCurrentChat(withChats(MessengerPage)))) as BlockClass
-// export const MessengerPageWithChats = withUser(withMessages(MessengerPage)) as BlockClass

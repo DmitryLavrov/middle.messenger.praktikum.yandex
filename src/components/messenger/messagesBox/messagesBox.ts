@@ -13,7 +13,7 @@ export class MessagesBox extends Block<MessagesBoxProps> {
     super({...props, tagName: 'div'})
   }
 
-  componentDidMount(): void {
+  componentDidMount() {
     this.setProps(messagesBoxProps(this.props.messages as Messages))
     this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
   }
