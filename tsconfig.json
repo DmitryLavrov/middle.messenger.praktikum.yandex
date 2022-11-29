@@ -17,5 +17,7 @@
     "suppressImplicitAnyIndexErrors": true
   },
   "include": ["src/**/*.ts"],
-  "typeRoots": ["src/hbs.d.ts"]
+  "typeRoots": [
+    "src/declarations.d.ts"
+  ]
 }

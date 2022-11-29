@@ -1,0 +1,18 @@
+.link {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+.link-profile-avatar {
+  width: 4rem;
+  height: 4rem;
+  background-color: transparent;
+  color: var(--color-secondary-light);
+}
+
+.link-messenger-avatar {
+  width: 2rem;
+  height: 2rem;
+  background-color: transparent;
+  color: var(--color-secondary-light);
+}

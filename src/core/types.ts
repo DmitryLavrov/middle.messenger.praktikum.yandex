@@ -1,99 +1,44 @@
 import {Block} from './block'
+import {ProfilePage} from '../pages/form/profile/profile/profilePage'
+import {MessengerPage} from '../pages/messenger/messenger/messengerPage'
+import {LoginPage} from '../pages/form/login/login/loginPage'
+import {ChangeProfilePage} from '../pages/form/profile/changeProfile/changeProfilePage'
+import {RegisterPage} from '../pages/form/login/register/registerPage'
+import {ChatMenuPage} from '../components/messenger/currentChat/chatMenu/chatMenuPage'
+import {ChangeChatAvatarPage} from '../components/messenger/currentChat/changeChatAvatar/changeChatAvatarPage'
 
-export type Prop = string | (() => {}) | Block<Props> | Block<Props>[]
-export type Props = Record<string, Prop> | {}
-export type Children = Record<string, Block<Props>>
-export type ChildrenArray = Record<string, Block<Props>[]>
+export type BlockProp = string | number | boolean | ((event: Event) => void) | Block<BlockProps> | Block<BlockProps>[] | Block<BlockChildren> | Indexed | Indexed[] | null
+export type BlockProps = Record<string, BlockProp>
+export type BlockChildren = Record<string, Block<BlockProps>>
+export type BlockChildrenArray = Record<string, Block<BlockProps>[]>
 
-export type FormData = Record<string, string>
+export type BlockPage = LoginPage | ChangeProfilePage | RegisterPage | ProfilePage | MessengerPage | ChatMenuPage | ChangeChatAvatarPage
+export type BlockClass = (typeof LoginPage) | (typeof ChangeProfilePage) | (typeof RegisterPage) | (typeof ProfilePage)
+  | (typeof MessengerPage) | (typeof ChatMenuPage) | (typeof ChangeChatAvatarPage)
 
-// Pages ---------------------------------------------------------
-export type ErrorPageProps = {
-  title: string
-  content: string
-  link: Block<Props>
-  attrClass?: string
-  testLinks?: Block<Props>
+export type Listeners = Record<string, Function[]>
+export type StringObject = Record<string, string>
+
+export type RouteProps = {
+  rootQuery: string
 }
 
-export type ChatPageProps = {
-  messageBox: Block<Props>
-  attrClass?: string
-  testLinks?: Block<Props>
+export type Indexed<T = any> = {
+  [key in string]: T;
 }
 
-export type FormPageProps = {
-  form: Block<Props>
-  attrClass?: string
-  testLinks?: Block<Props>
+export type RequestOptions = {
+  timeout?: number
+  method?: string
+  headers?: Record<string, string>
+  urlParams?: Indexed
+  credentials?: boolean
+  body?: Indexed
+  retries?: number
 }
 
-export type ProfilePageProps = {
-  form: Block<Props>
-  attrClass?: string
-  testLinks?: Block<Props>
-}
-
-// Components ---------------------------------------------------
-export type TestLinksProps = {
-  attrClass?: string
-}
-
-export type FormProps = {
-  title: string
-  fields: Block<Props>[]
-  buttons: Block<Props>[]
-  attrClass?: string
-  eventSubmit?: ()=>{}
-}
-
-export type FieldProps = {
-  name?: string
-  label?: string
-  input: Block<Props>
-  attrClass?: string
-}
-
-export type InputProps = {
-  attrId: string
-  attrName: string
-  attrValue?: string
-  attrType: string
-  attrPlaceholder?: string
-  attrReadonly?: string
-  attrClass?: string
-  eventFocus?: ()=>{}
-  eventBlur?: ()=>{}
-}
-
-export type MessageBoxProps = {
-  button: Block<Props>
-  form: Block<Props>
-  attrClass?: string
-}
-
-export type MessageFormProps = {
-  input: Block<Props>
-  button: Block<Props>
-  attrClass?: string
-  eventSubmit: ()=>{}
-}
-
-// Simple components ------------------------------------------------
-export type ButtonProps = {
-  attrType: string
-  label: string
-  eventClick?: () => {}
-}
-
-export type LinkProps = {
-  label: string
-  attrHref: string
-  attrClass?: string
-}
-
-export type InputReadOnlyProps = {
-  attrId: string
-  attrClass?: string
-  context: string
+export type ResponseController = {
+  status?: number,
+  errorMessage?: string,
+  response?: Indexed,
 }

@@ -1,8 +1,13 @@
 import Handlebars from 'handlebars'
 import {EventBus} from './eventBus'
-import {Children, ChildrenArray, Props} from './types'
+import {BlockChildren, BlockChildrenArray, BlockProps} from './types'
+import {deepClone, isEqual} from '../utils/helpers'
 
-export abstract class Block<T extends Props> {
+const EVENT_PREFIX = 'on'
+const ATTRIBUTE_PREFIX = 'attr'
+const DATA_PREFIX = 'data'
+
+export abstract class Block<T extends BlockProps> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -13,26 +18,24 @@ export abstract class Block<T extends Props> {
   private readonly _tagName: string
   private _element: HTMLElement
   protected props: T
-  protected children: Children
-  protected childrenArray: ChildrenArray
-  private eventBus: EventBus
+  protected children: BlockChildren
+  protected childrenArray: BlockChildrenArray
+  protected eventBus: EventBus
   private readonly _id: string
 
   // =====================================================================
   // constructor
-  protected constructor(tagName = 'div', propsAndChildren = {}) {
-    this._tagName = tagName
+  protected constructor(propsAndChildren: BlockProps = {}) {
+    this._tagName = (propsAndChildren.tagName ? propsAndChildren.tagName : 'div') as string
     const {children, childrenArray, props} = this._getChildren(propsAndChildren)
 
     this._id = Math.random().toString(36).slice(2)
 
     this.children = children
     this.childrenArray = childrenArray
-
     this.props = this._makePropsProxy({...props, id: this._id}) as T
 
     this.eventBus = new EventBus()
-
     this._registerEvents()
     this.eventBus.emit(Block.EVENTS.INIT)
   }
@@ -54,82 +57,98 @@ export abstract class Block<T extends Props> {
   }
 
   private _createDocumentElement(tagName: string): HTMLElement {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     const element = document.createElement(tagName)
     if (this._id) {
       element.dataset.id = this._id
     }
+
+    // attrClass --> class, attrHref --> href
     Object.entries(this.props)
-      .filter(([key]) => key.startsWith('attr'))
+      .filter(([key]) => key.startsWith(ATTRIBUTE_PREFIX))
       .forEach(([key, value]) => {
-        const attributeName = key.slice(4).toLowerCase()
+        const attributeName = key.slice(ATTRIBUTE_PREFIX.length).toLowerCase()
         element.setAttribute(attributeName, value as string)
+      })
+
+    // dataChatid --> [data-chatid]
+    Object.entries(this.props)
+      .filter(([key]) => key.startsWith(DATA_PREFIX))
+      .forEach(([key, value]) => {
+        const attributeName = key.slice(DATA_PREFIX.length).toLowerCase()
+        element.dataset[attributeName] = value?.toString()
       })
     return element
   }
 
   // =====================================================================
-  // Event CDM
+  // Event ComponentDidMount
   private _componentDidMount() {
-    this.componentDidMount && this.componentDidMount(this.props)
-    this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
+    if (this.componentDidMount) {
+      this.componentDidMount()
+    } else {
+      this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
+    }
   }
 
-  protected componentDidMount?(oldProps: Props): void
+  protected componentDidMount?(): void
 
-  public dispatchComponentDidMount(): void {
+  dispatchComponentDidMount(): void {
     this.eventBus.emit(Block.EVENTS.FLOW_CDM)
   }
 
   // =====================================================================
-  // Event CDU
-  private _componentDidUpdate(oldProps: Props, newProps: Props) {
+  // Event ComponentDidUpdate
+  private _componentDidUpdate(oldProps: BlockProps, newProps: BlockProps) {
     let needRender = true
-
     this.componentDidUpdate && (needRender = this.componentDidUpdate(oldProps, newProps))
     if (needRender) {
       this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
     }
   }
 
-  protected componentDidUpdate?(oldProps: Props, newProps: Props): boolean
+  protected componentDidUpdate?(oldProps: BlockProps, newProps: BlockProps): boolean
 
-  public setProps(newProps: Props) {
-    if (!newProps) {
+  // =====================================================================
+  // setProps(newPropsAndChildren)
+  setProps(newPropsAndChildren: BlockProps) {
+    if (!newPropsAndChildren) {
       return
     }
+    const {children, childrenArray, props} = this._getChildren(newPropsAndChildren)
 
-    Object.assign(this.props, newProps)
-    this.eventBus.emit(Block.EVENTS.FLOW_CDU)
+    Object.assign(this.props, props)
+    Object.assign(this.children, children)
+    Object.assign(this.childrenArray, childrenArray)
   }
 
   // =====================================================================
   // Getter element
-  public get element() {
+  get element() {
     return this._element
   }
 
   // =====================================================================
   // RENDER
   private _render() {
-    const fragment = this.render()
+    if (this.render) {
+      const fragment = this.render()
 
-    this._removeEvents()
-
-    this._element.innerHTML = ''
-    this._element.appendChild(fragment)
-    this._addEvents()
+      this._removeEvents()
+      this._element.innerHTML = ''
+      this._element.appendChild(fragment)
+      this._addEvents()
+    }
   }
 
-  public abstract render(): DocumentFragment
+  protected render?(): DocumentFragment
 
   // =====================================================================
   // _addEvents
   private _addEvents(): void {
     Object.entries(this.props)
-      .filter(([key]) => key.startsWith('event'))
+      .filter(([key]) => key.startsWith(EVENT_PREFIX))
       .forEach(([key, value]) => {
-        const eventName = key.slice(5).toLowerCase()
+        const eventName = key.slice(EVENT_PREFIX.length).toLowerCase()
         this._element.addEventListener(eventName, value as () => {}, true)
       })
   }
@@ -138,36 +157,28 @@ export abstract class Block<T extends Props> {
   // _removeEvents
   private _removeEvents(): void {
     Object.entries(this.props)
-      .filter(([key]) => key.startsWith('event'))
+      .filter(([key]) => key.startsWith(EVENT_PREFIX))
       .forEach(([key, value]) => {
-        const eventName = key.slice(5).toLowerCase()
+        const eventName = key.slice(EVENT_PREFIX.length).toLowerCase()
         this._element.removeEventListener(eventName, value as () => {}, true)
       })
   }
 
   // =====================================================================
   // _makePropsProxy
-  private _makePropsProxy(props: Props) {
+  private _makePropsProxy(props: BlockProps) {
     return new Proxy(props, {
-      get: (target: Props, prop: string) => target[prop],
+      get: (target: BlockProps, prop: string) => target[prop],
 
-      set: (target: Props, prop: string, value: string): boolean => {
-        const oldProps = target[prop]
-        if (oldProps === value) {
-          return false
+      set: (target: BlockProps, prop: string, value: BlockProps): boolean => {
+        if (isEqual(target[prop], value)) {
+          return true
         }
+
+        const oldTarget = deepClone(target)
         target[prop] = value
-        this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
-        return true
-      },
 
-      deleteProperty: (target: Props, prop: string) => {
-        if (prop.indexOf('_') === 0) {
-          throw new Error('Access denied')
-        }
-        const oldProps = target[prop]
-        delete target[prop]
-        this.eventBus.emit(Block.EVENTS.FLOW_CDU, oldProps, target[prop])
+        this.eventBus.emit(Block.EVENTS.FLOW_CDU, oldTarget as BlockProps, target)
         return true
       }
     })
@@ -175,16 +186,16 @@ export abstract class Block<T extends Props> {
 
   // =====================================================================
   // _getChildren
-  private _getChildren(propsAndChildren: Props | Children | Children[]) {
-    const children: Children = {}
-    const childrenArray: ChildrenArray = {}
-    const props: Props = {}
+  private _getChildren(propsAndChildren: BlockProps | BlockChildren | BlockChildrenArray) {
+    const children: BlockChildren = {}
+    const childrenArray: BlockChildrenArray = {}
+    const props: BlockProps = {}
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
-      if (value instanceof Block) {
-        children[key] = value
-      } else if (Array.isArray(value) && value.every(i => (i instanceof Block))) {
-        childrenArray[key] = value
+      if (key.startsWith('child') && Array.isArray(value) && (value[0] instanceof Block)) {
+        childrenArray[key] = value as Block<BlockProps>[]
+      } else if (key.startsWith('child') && (value instanceof Block)) {
+        children[key] = value as Block<BlockProps>
       } else {
         props[key] = value
       }
@@ -195,8 +206,8 @@ export abstract class Block<T extends Props> {
 
   // =====================================================================
   // COMPILE
-  compile(tmpl: string, props: Props = {}) {
-    const propsAndStubs: Props = {...props}
+  compile(tmpl: string, props: BlockProps | {} = {}) {
+    const propsAndStubs: BlockProps | {} = deepClone(props)
 
     // Make stubs for children
     Object.entries(this.children).forEach(([key, child]) => {
@@ -215,7 +226,7 @@ export abstract class Block<T extends Props> {
         if (child._id) {
           return {[keySliced]: `<div data-id="${child._id}"></div>`}
         }
-        throw new Error(`Child element without id. Please check props \n ${JSON.stringify(child.props, null, 2)}`)
+        throw new Error(`Child element without id. Please check props \n ${JSON.stringify(child, null, 2)}`)
       })
     })
 
@@ -251,11 +262,12 @@ export abstract class Block<T extends Props> {
 
   // =====================================================================
   // show & hide
-  public show() {
+  show() {
     this._element.style.display = 'block'
+    this.dispatchComponentDidMount()
   }
 
-  public hide() {
+  hide() {
     this._element.style.display = 'none'
   }
 }
