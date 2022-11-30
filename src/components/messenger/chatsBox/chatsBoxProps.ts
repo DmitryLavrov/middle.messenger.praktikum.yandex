@@ -1,4 +1,4 @@
-import chatAvatar from 'bundle-text:../../../images/avatar.svg'
+import chatAvatar from '../../../images/avatar.svg'
 import {Button} from '../../common/button/button'
 import {Chat} from './chat/chat'
 import {Avatar} from '../../common/avatar/avatar'

@@ -44,6 +44,17 @@ $ npm i -D stylelint-config-standard-scss
 $ npm i -D mocha @types/mocha chai @types/chai
 ```
 
+#### Sprint 4
+```shell
+$ npm i -D webpack webpack-cli
+$ npm i -D ts-loader
+$ npm i -D style-loader css-loader sass-loader resolve-url-loader
+$ npm i -D handlebars-loader
+#$ npm i -D html-loader
+$ npm i -D npm i -D html-webpack-plugin
+$ npm i -D npm i -D mini-css-extract-plugin
+```
+
 ## Design
 Prototype in Figma   
 https://www.figma.com/file/gWjpaJYGdjWYTCyyI6QFps/Y-chat?node-id=0%3A1

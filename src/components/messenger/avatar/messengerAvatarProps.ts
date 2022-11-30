@@ -1,5 +1,5 @@
 import '../../../styles/main.scss'
-import userSvg from 'bundle-text:../../../images/user.svg'
+import userSvg from '../../../images/user.svg'
 import {goSettings} from '../../../services/eventHandlers'
 import {Indexed} from '../../../core/types'
 import {Avatar} from '../../common/avatar/avatar'
