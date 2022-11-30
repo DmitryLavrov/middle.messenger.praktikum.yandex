@@ -1,4 +1,4 @@
-import userSvg from 'bundle-text:../../../../images/user.svg'
+import userSvg from '../../../../images/user.svg'
 import {Form} from '../../../../components/form/form/form'
 import {FieldBox} from '../../../../components/form/fieldBox/fieldBox'
 import {Button} from '../../../../components/common/button/button'

@@ -4,7 +4,9 @@
   "description": "Yandex Practicum Chat",
   "scripts": {
     "dev": "parcel ./static/index.html --port 3000",
-    "build": "parcel build ./static/index.html",
+    "parcel-build": "parcel build ./static/index.html",
+    "build": "webpack",
+    "webpack-serve": "webpack serve --open",
     "start": "npm run build && node app.js",
     "clear": "rm -rf dist .parcel-cache",
     "eslint": "eslint . --ext=.js,.ts",
@@ -26,18 +28,35 @@
     "@typescript-eslint/eslint-plugin": "5.44.0",
     "@typescript-eslint/parser": "5.44.0",
     "chai": "4.3.7",
+    "css-loader": "^6.7.2",
     "eslint": "8.28.0",
     "eslint-config-airbnb": "19.0.4",
+    "handlebars-loader": "^1.7.2",
+    "html-webpack-plugin": "^5.5.0",
+    "i": "^0.3.7",
     "mocha": "10.1.0",
+    "npm": "^9.1.2",
     "parcel": "2.8.0",
+    "resolve-url-loader": "^5.0.0",
     "sass": "1.56.1",
+    "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.1",
     "stylelint": "14.15.0",
     "stylelint-config-standard": "29.0.0",
     "stylelint-config-standard-scss": "5.0.0",
-    "typescript": "4.9.3"
+    "ts-loader": "^9.4.1",
+    "typescript": "4.9.3",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
     "express": "4.18.2",
     "handlebars": "4.7.7"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
   }
 }

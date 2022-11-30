@@ -1,4 +1,4 @@
-import userAvatar from 'bundle-text:../../../images/user.svg'
+import userAvatar from '../../../images/user.svg'
 import {Button} from '../../common/button/button'
 import {Avatar} from '../../common/avatar/avatar'
 import {timeToRenderString} from '../../../utils/helpers'
