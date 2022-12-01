@@ -1,76 +1,69 @@
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-module.exports = {
-  mode: 'development',
+const isProduction = process.env.NODE_ENV === 'production'
+
+const stylesHandler = MiniCssExtractPlugin.loader
+
+const config = {
   entry: './src/index.ts',
-  devtool: 'source-map',
-  devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist'),
-    },
-    compress: true,
-    port: 3000,
-    hot: true,
-    historyApiFallback: true
-  },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'webpack-bundle.js'
+    path: path.resolve(__dirname, 'dist')
   },
-  resolve: {
-    extensions: ['.ts', '.js', '.json'],
-    alias: {
-      'handlebars': 'handlebars/dist/handlebars.js'
-    }
+  devServer: {
+    open: true,
+    host: 'localhost',
+    port: 3000
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/template.html'
+    }),
+    new MiniCssExtractPlugin()
+  ],
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: [
-          {
-            loader: 'ts-loader',
-            options: {
-              configFile: path.resolve(__dirname, 'tsconfig.json')
-            }
-          }
-        ],
-        exclude: /(node_modules)/
+        test: /\.(ts|tsx)$/i,
+        loader: 'ts-loader',
+        exclude: ['/node_modules/']
+      },
+      {
+        test: /\.css$/i,
+        use: [stylesHandler, 'css-loader']
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [
-          // Creates `style` nodes from JS strings
-          'style-loader',
-          // Translates CSS into CommonJS
-          'css-loader',
-          // Compiles Sass to CSS
-          {
-            loader: 'sass-loader',
-            options: {
-              implementation: require('sass'),
-              sourceMap: true
-            }
-          }
-        ]
+        use: [stylesHandler, 'css-loader', 'sass-loader']
       },
       {
-        test: /\.hbs$/,
-        loader: 'handlebars-loader'
+        test: /\.(eot|ttf|woff|woff2|png|jpg|gif)$/i,
+        type: 'asset'
       },
       {
-        test: /\.svg/,
+        test: /\.svg$/i,
         type: 'asset/source'
       },
       {
-        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
-        type: 'asset/inline',
-
-      },
-      {
-        test: /\.html/,
-        type: 'asset/inline',
-      },
+        test: /\.hbs$/,
+        type: 'asset/source'
+      }
     ]
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.jsx', '.js'],
+    alias: {
+      handlebars: 'handlebars/dist/handlebars.js'
+    }
   }
+}
+
+module.exports = () => {
+  if (isProduction) {
+    config.mode = 'production'
+  } else {
+    config.mode = 'development'
+  }
+  return config
 }

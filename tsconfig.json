@@ -2,9 +2,10 @@
   "compilerOptions": {
     "outDir": "dist",
     "baseUrl": ".",
-    "target": "es2018",
+    "target": "es6",
+    "allowJs": true,
     "declaration": false,
-    "module": "commonjs",
+    "module": "es6",
     "strictNullChecks": true,
     "sourceMap": true,
     "noImplicitAny": true,
