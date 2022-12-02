@@ -13,7 +13,7 @@ import {AddUserToChat} from './components/messenger/currentChat/addUserToChat/ad
 import {DeleteUserFromChat} from './components/messenger/currentChat/deleteUserFromChat/deleteUserFromChat'
 
 router
-  .use('/', LoginPage)
+  .use("/", LoginPage )
   .use('/sign-up', RegisterPage)
   .use('/settings', ProfilePageWithUser)
   .use('/settings/changeProfile', ChangeProfilePageWithUser)

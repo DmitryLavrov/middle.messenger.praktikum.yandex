@@ -48,6 +48,10 @@ $ npm i -D mocha @types/mocha chai @types/chai
 ```shell
 $ npm i -D webpack webpack-cli
 $ npx webpack init
+$ npm r @webpack-cli/generators
+
+$ npm i -D husky
+$ npm i -D npm-run-all
 ```
 
 ## Design
@@ -82,5 +86,27 @@ $ npm run stylelint
 $ npm run stylelint-fix
 ```
 
+## Docker commands
+```shell
+$ docker images
+$ docker build -t msges .
+$ docker run -d -p 8080:3000 --name msges --rm msges
+$ docker ps -a
+$ docker stop msges 
+```
+
+## Heroku commands
+```shell
+$ heroku login
+$ heroku container:login
+$ heroku create dmi-msges
+$ heroku container:push web
+$ heroku container:release web
+$ heroku open
+
+$ heroku apps:info
+```
+
 ## Deployment
-https://dmi-chat.netlify.app/
+https://dmi-chat.netlify.app    
+https://dmi-msges.herokuapp.com
