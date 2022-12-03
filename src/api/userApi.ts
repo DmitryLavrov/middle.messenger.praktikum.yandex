@@ -1,5 +1,5 @@
 import {BaseApi} from './baseApi'
-import {fetchWithMethod} from '../services/httpTransport'
+import {fetchWithMethod} from '../services/http/httpTransport'
 import {Indexed} from '../core/types'
 
 class UserApi extends BaseApi {

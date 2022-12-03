@@ -2,7 +2,7 @@ import {Form} from '../../../form/form/form'
 import {Button} from '../../../common/button/button'
 import {Input} from '../../../form/input/input'
 import '../../../../styles/main.scss'
-import {router} from '../../../../services/router'
+import {router} from '../../../../services/router/router'
 import {changeChatAvatar} from '../currentChatEventHandlers'
 import {ProfileProps} from '../../../../pages/form/profile/profile/profileTypes'
 

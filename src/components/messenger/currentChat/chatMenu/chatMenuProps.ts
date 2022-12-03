@@ -1,7 +1,7 @@
 import {Form} from '../../../form/form/form'
 import {Button} from '../../../common/button/button'
 import '../../../../styles/main.scss'
-import {router} from '../../../../services/router'
+import {router} from '../../../../services/router/router'
 import {deleteChat} from '../currentChatEventHandlers'
 import {FormPageProps} from '../../../../pages/form/formPageTypes'
 

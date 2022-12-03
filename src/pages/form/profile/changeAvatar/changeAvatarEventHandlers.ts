@@ -1,5 +1,5 @@
 import {userController} from '../../../../controllers/userController'
-import {router} from '../../../../services/router'
+import {router} from '../../../../services/router/router'
 import {showErrorElement} from '../../../../services/errorHandlers'
 
 export const changeAvatar = async (event: Event) => {

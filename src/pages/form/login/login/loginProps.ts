@@ -5,7 +5,7 @@ import {submitLogin, inputBlur, inputFocus} from '../../../../services/eventHand
 import '../../../../styles/main.scss'
 import {Link} from '../../../../components/common/link/link'
 import {Input} from '../../../../components/form/input/input'
-import {router} from '../../../../services/router'
+import {router} from '../../../../services/router/router'
 import {FormPageProps} from '../../formPageTypes'
 
 export const loginProps = (): FormPageProps => ({
