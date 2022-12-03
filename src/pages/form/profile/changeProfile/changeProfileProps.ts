@@ -5,7 +5,7 @@ import {Input} from '../../../../components/form/input/input'
 import {submitChangeProfile, inputBlur, inputFocus} from '../../../../services/eventHandlers'
 import '../../../../styles/main.scss'
 import {Indexed} from '../../../../core/types'
-import {router} from '../../../../services/router'
+import {router} from '../../../../services/router/router'
 import {ProfileProps} from '../profile/profileTypes'
 
 export const changeProfileProps = (user: Indexed | undefined): ProfileProps => ({

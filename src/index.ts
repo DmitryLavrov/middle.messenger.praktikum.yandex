@@ -1,4 +1,4 @@
-import {router} from './services/router'
+import {router} from './services/router/router'
 import {ProfilePageWithUser} from './pages/form/profile/profile/profilePage'
 import {MessengerPageWithChats} from './pages/messenger/messenger/messengerPage'
 import {LoginPage} from './pages/form/login/login/loginPage'
@@ -8,12 +8,14 @@ import {ChangePasswordPageWithUser} from './pages/form/profile/changePassword/ch
 import {ChangeAvatarPageWithUser} from './pages/form/profile/changeAvatar/changeAvatarPage'
 import {NewChatPage} from './components/messenger/chatsBox/newChat/newChatPage'
 import {ChatMenuPage} from './components/messenger/currentChat/chatMenu/chatMenuPage'
-import {ChangeChatAvatarPageWithCurrentChat} from './components/messenger/currentChat/changeChatAvatar/changeChatAvatarPage'
+import {
+  ChangeChatAvatarPageWithCurrentChat
+} from './components/messenger/currentChat/changeChatAvatar/changeChatAvatarPage'
 import {AddUserToChat} from './components/messenger/currentChat/addUserToChat/addUserToChat'
 import {DeleteUserFromChat} from './components/messenger/currentChat/deleteUserFromChat/deleteUserFromChat'
 
 router
-  .use("/", LoginPage )
+  .use('/', LoginPage)
   .use('/sign-up', RegisterPage)
   .use('/settings', ProfilePageWithUser)
   .use('/settings/changeProfile', ChangeProfilePageWithUser)

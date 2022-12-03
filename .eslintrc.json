@@ -30,7 +30,9 @@
     "no-restricted-syntax": "off",
     "radix": "off",
     "no-prototype-builtins": "off",
-    "no-continue": "off"
+    "no-continue": "off",
+    "import/no-extraneous-dependencies": "off",
+    "global-require": "off"
   },
   "settings": {
     "react": {

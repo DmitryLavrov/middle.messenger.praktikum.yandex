@@ -42,16 +42,20 @@ $ npm i -D stylelint-config-standard-scss
 ```shell
 ## Testing
 $ npm i -D mocha @types/mocha chai @types/chai
+$ npm i -D ts-node
+$ npm i -D jsdom
+$ npm i -D xhr2
 ```
 
 #### Sprint 4
 ```shell
+## Webpack
 $ npm i -D webpack webpack-cli
 $ npx webpack init
 $ npm r @webpack-cli/generators
 
-$ npm i -D husky
-$ npm i -D npm-run-all
+## Husky
+$ npx husky-init && npm install
 ```
 
 ## Design

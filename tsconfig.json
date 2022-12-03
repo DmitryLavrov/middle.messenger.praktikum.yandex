@@ -5,14 +5,14 @@
     "target": "es6",
     "allowJs": true,
     "declaration": false,
-    "module": "es6",
+    "module": "es2020",
     "strictNullChecks": true,
     "sourceMap": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "moduleResolution": "node",
-    "isolatedModules": true,
+    "isolatedModules": false,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "suppressImplicitAnyIndexErrors": true
@@ -20,5 +20,13 @@
   "include": ["src/**/*.ts"],
   "typeRoots": [
     "src/declarations.d.ts"
-  ]
+  ],
+  "ts-node": {
+    "transpileOnly": true,
+    "files": true,
+
+    "compilerOptions": {
+      "module": "commonjs",
+    }
+  }
 }
