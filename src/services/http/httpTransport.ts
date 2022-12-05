@@ -1,5 +1,5 @@
-import {queryStringify} from '../utils/helpers'
-import {RequestOptions, ResponseController} from '../core/types'
+import {queryStringify} from '../../utils/helpers'
+import {RequestOptions, ResponseController} from '../../core/types'
 
 type HttpMethod = (
   url: string,

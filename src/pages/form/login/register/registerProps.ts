@@ -5,7 +5,7 @@ import {Input} from '../../../../components/form/input/input'
 import {Link} from '../../../../components/common/link/link'
 import {submitRegister, inputBlur, inputFocus} from '../../../../services/eventHandlers'
 import '../../../../styles/main.scss'
-import {router} from '../../../../services/router'
+import {router} from '../../../../services/router/router'
 import {FormPageProps} from '../../formPageTypes'
 
 export const registerProps = (): FormPageProps => ({

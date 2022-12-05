@@ -1,5 +1,5 @@
 import {ResponseController} from '../../../core/types'
-import {router} from '../../../services/router'
+import {router} from '../../../services/router/router'
 import {showErrorElement} from '../../../services/errorHandlers'
 import {chatsController} from '../../../controllers/chatsController'
 import {store} from '../../../services/store/store'

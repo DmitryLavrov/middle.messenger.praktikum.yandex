@@ -1,9 +1,9 @@
 import {Route} from './route'
-import {BlockClass, RouteProps} from '../core/types'
+import {BlockClass, RouteProps} from '../../core/types'
 
 class Router {
-  public routes: Route[]
-  public history: History
+  private _routes: Route[]
+  private _history: History
   private _currentRoute: Route | null
   private readonly _routeProps: RouteProps
   private static __instance: Router
@@ -13,8 +13,8 @@ class Router {
       return Router.__instance
     }
 
-    this.routes = []
-    this.history = window.history
+    this._routes = []
+    this._history = window.history
     this._currentRoute = null
     this._routeProps = props
 
@@ -23,7 +23,7 @@ class Router {
 
   use(pathname: string, block: BlockClass) {
     const route = new Route(pathname, block, this._routeProps)
-    this.routes.push(route)
+    this._routes.push(route)
     return this
   }
 
@@ -50,20 +50,20 @@ class Router {
   }
 
   go(pathname: string) {
-    this.history.pushState({}, '', pathname)
+    this._history.pushState({}, '', pathname)
     this._onRoute(pathname)
   }
 
   back() {
-    this.history.back()
+    this._history.back()
   }
 
   forward() {
-    this.history.forward()
+    this._history.forward()
   }
 
   getRoute(pathname: string) {
-    return this.routes.find(route => route.match(pathname))
+    return this._routes.find(route => route.match(pathname))
   }
 }
 

@@ -2,7 +2,7 @@ import {StringObject} from '../core/types'
 import {validateField, validateForm} from './validation'
 import {hideErrorElement, showErrorElement} from './errorHandlers'
 import {authController} from '../controllers/authController'
-import {router} from './router'
+import {router} from './router/router'
 import {userController} from '../controllers/userController'
 import {chatsController} from '../controllers/chatsController'
 

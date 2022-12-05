@@ -1,0 +1,12 @@
+.git
+.github
+.idea
+.DS_Store
+.parcel-cache
+node_modules
+README.md
+dist
+build
+package-lock.json
+.env*
+npm-debug.log*

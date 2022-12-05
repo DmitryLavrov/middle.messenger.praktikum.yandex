@@ -4,7 +4,7 @@ import {Button} from '../../../../components/common/button/button'
 import {Input} from '../../../../components/form/input/input'
 import {inputBlur, inputFocus, submitChangePassword} from '../../../../services/eventHandlers'
 import '../../../../styles/main.scss'
-import {router} from '../../../../services/router'
+import {router} from '../../../../services/router/router'
 import {ProfileProps} from '../profile/profileTypes'
 
 export const changePasswordProps = (): ProfileProps => ({

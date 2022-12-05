@@ -2,7 +2,7 @@ import {Form} from '../../../../components/form/form/form'
 import {Button} from '../../../../components/common/button/button'
 import {Input} from '../../../../components/form/input/input'
 import '../../../../styles/main.scss'
-import {router} from '../../../../services/router'
+import {router} from '../../../../services/router/router'
 import {changeAvatar} from './changeAvatarEventHandlers'
 import {ProfileProps} from '../profile/profileTypes'
 

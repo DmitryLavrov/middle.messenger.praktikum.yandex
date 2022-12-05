@@ -4,7 +4,7 @@ import {Button} from '../../../common/button/button'
 import {inputBlur, inputFocus, submitNewChat} from '../../../../services/eventHandlers'
 import '../../../../styles/main.scss'
 import {Input} from '../../../form/input/input'
-import {router} from '../../../../services/router'
+import {router} from '../../../../services/router/router'
 import {FormPageProps} from '../../../../pages/form/formPageTypes'
 
 export const newChatProps = (): FormPageProps => ({

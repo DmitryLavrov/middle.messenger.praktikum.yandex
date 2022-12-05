@@ -1,5 +1,5 @@
-import {render} from '../utils/helpers'
-import {BlockClass, BlockPage, RouteProps} from '../core/types'
+import {render} from '../../utils/helpers'
+import {BlockClass, BlockPage, RouteProps} from '../../core/types'
 
 export class Route {
   private _pathname: string

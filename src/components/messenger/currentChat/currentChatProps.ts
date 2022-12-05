@@ -1,8 +1,8 @@
-import chatAvatar from 'bundle-text:../../../images/avatar.svg'
+import chatAvatar from '../../../images/avatar.svg'
 import {Avatar} from '../../common/avatar/avatar'
 import {store} from '../../../services/store/store'
 import {Button} from '../../common/button/button'
-import {router} from '../../../services/router'
+import {router} from '../../../services/router/router'
 import {CurrentChatBoxProps} from './currentChatBox/currentChatBoxTypes'
 import {CurrentChat, User} from '../../../services/store/storeTypes'
 
